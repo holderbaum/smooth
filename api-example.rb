@@ -13,7 +13,7 @@ Smooth.new do
 
     slide "Title of Slide #1" do
       box "Some text in this section" do
-        p "Look at this, I'm in a paragraph"
+        text "Look at this, I'm in a paragraph"
       end
       
       box "Look at this list" do
@@ -29,7 +29,7 @@ Smooth.new do
 
     slide "Vertical centering" do
       box "This content is vertical centered", :vcenter => true do
-        p "This is the box content"
+        text "This is the box content"
       end
     end
 
@@ -47,9 +47,8 @@ Smooth.new do
 
     slide "Boxes" do
       box do
-        p "A box can be used without a title, too."
+        text "A box can be used without a title, too."
       end
     end
-
   end
 end
