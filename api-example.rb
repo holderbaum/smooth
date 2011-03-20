@@ -1,16 +1,14 @@
 Smooth.new do
 
-  meta.title      "API"
+  title      "API"
 
-  meta.generator  "Organic"
-  meta.author     "J Holderbaum"
-  meta.company    "Foo"
-  meta.email      "mail@foo.bar"
-  meta.date       DateTime.now
-  meta.venue      "Interwebz"
+  author     "J Holderbaum"
+  company    "Foo"
+  email      "mail@foo.bar"
+  date       DateTime.now
+  venue      "Interwebz"
 
   slides do
-
     slide "Title of Slide #1" do
       box "Some text in this section" do
         text "Look at this, I'm in a paragraph"
