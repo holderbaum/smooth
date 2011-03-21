@@ -7,9 +7,14 @@ module Smooth
           @content = {}
         end
 
-        def content(title, &block)
-          @content[title] = capture_haml(&block) if block_given?
-          @content[title]
+        def content(title, string=nil, &block)
+          if string
+            @content[title] = "#{string}\n"
+          elsif block_given?
+            @content[title] = capture_haml(&block) if block_given?
+          else
+            @content[title]
+          end
         end
       end
 
