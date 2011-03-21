@@ -22,7 +22,26 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
   -venue    "the venue"
     EOC
 
+    result = {
+      :title => "the title",
+      :author => "the author",
+      :company => "the company",
+      :email => "the email",
+      :date => "the date",
+      :venue => "the venue"
+    }
+
     cs = content_store(haml)
-    assert_equal "", cs.context.about.inspect
+    assert_equal result, cs.context.about
+  end
+
+  test "about attributes should be accessible" do
+    haml = <<-EOC
+-about do
+  -title    "the title"
+    EOC
+
+    cs = content_store(haml)
+    assert_equal "the title", cs.context.about(:title)
   end
 end
