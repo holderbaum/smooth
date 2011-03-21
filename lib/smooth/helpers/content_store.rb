@@ -4,7 +4,11 @@ module Smooth
 
       def initialize(layout)
         @content = {}
-        @layout = Haml::Engine.new(layout).render(self)
+        @layout = layout 
+      end
+      
+      def render!
+        Haml::Engine.new(@layout).render(self)
       end
 
       def content(title, &block)
