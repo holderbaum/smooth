@@ -8,6 +8,8 @@ module Smooth
 
     def render(content)
       content_store = ContentStore.new(content)
+      content_store.render!
+
       Haml::Engine.new(@layout).render(content_store)
     end
 
