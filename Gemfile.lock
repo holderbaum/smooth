@@ -4,6 +4,7 @@ GEM
     contest (0.1.2)
     ffi (1.0.7)
       rake (>= 0.8.7)
+    haml (3.0.25)
     libnotify (0.3.0)
       ffi (>= 0.6.2)
     rake (0.8.7)
@@ -14,5 +15,6 @@ PLATFORMS
 
 DEPENDENCIES
   contest
+  haml
   libnotify
   watchr
