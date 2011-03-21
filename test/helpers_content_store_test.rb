@@ -13,6 +13,7 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
   .other
     EOC
     cs = ContentStore.new(haml)
+    cs.render!
 
     assert_equal "<div class='something'></div>\n", cs.content(:about)
     assert_equal "<div class='other'></div>\n", cs.content(:slides)
