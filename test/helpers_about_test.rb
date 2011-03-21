@@ -5,7 +5,7 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
   include Smooth::Helpers
 
   def content_store(haml)
-    ContentStore.send(:include, Smooth::Helpers::About)
+    ContentStore.register_helpers Smooth::Helpers::About
     cs = ContentStore.new(haml)
     cs.render!
     cs
@@ -23,6 +23,6 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
     EOC
 
     cs = content_store(haml)
-    assert_equal "", cs.about.inspect
+    assert_equal "", cs.context.about.inspect
   end
 end
