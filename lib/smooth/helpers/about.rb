@@ -1,8 +1,13 @@
 module Smooth
   module Helpers
     module About
-      def about(&block)
+      def about(title = nil, &block)
         @about ||= {}
+
+        if title
+          return @about[title]
+        end
+
         content(:about, &block) if block_given?
         @about
       end
