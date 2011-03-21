@@ -1,5 +1,5 @@
 require 'test/helper'
-require 'lib/smooth/base'
+require 'lib/smooth'
 
 class SmoothBaseTest < Test::Unit::TestCase
   include Smooth
@@ -7,22 +7,25 @@ class SmoothBaseTest < Test::Unit::TestCase
   context "Layout" do
     test "it should render everything in the layout" do
       layout = <<-EOC
-.html
-  .body
-    =slides
+%html
+  %body
+    =content :placeholder
       EOC
       result = <<-EOC
 <html>
   <body>
-    <div class="slides">
-      <p>stuff</p>
-    </div>
+    <p>stuff</p>
   </body>
 </html>
       EOC
 
+      content = <<-EOC
+- content :placeholder do
+  %p stuff
+      EOC
+
       smooth = Base.new(layout)
-      assert_equal result, smooth.render(".p stuff")
+      assert_equal result, smooth.render(content)
     end
   end
 
