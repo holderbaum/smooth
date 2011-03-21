@@ -32,7 +32,7 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
       ContentStore.register_helpers(ExampleHelperModule)
       cs = ContentStore.new("")
 
-      assert_equal "return", cs.instance_variable_get('@context').weird_method_name
+      assert_equal "return", cs.context.weird_method_name
     end
   end
 end

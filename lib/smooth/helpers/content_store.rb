@@ -17,6 +17,8 @@ module Smooth
         RenderContext.send :include, mod
       end
 
+      attr_reader :context
+
       def initialize(layout)
         @content = {}
         @context = RenderContext.new
