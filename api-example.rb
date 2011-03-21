@@ -1,52 +1,30 @@
-Smooth.new do
+-#
+  components/
+    sec.haml   # <---- title=nil
+    sec_notice.haml
+    slide.haml
+    slide_plain.haml
+    text.haml
 
-  title      "API"
+=about do
+  =title    "API"
+  =author   "J Holderbaum"
+  =company  "Company"
+  =email    "mail@daemon.com"
+  =date     # defaults to DateTime.now
+  =venue    "Interwebz"
 
-  author     "J Holderbaum"
-  company    "Foo"
-  email      "mail@foo.bar"
-  date       DateTime.now
-  venue      "Interwebz"
 
-  slides do
-    slide "Title of Slide #1" do
-      box "Some text in this section" do
-        text "Look at this, I'm in a paragraph"
-      end
-      
-      box "Look at this list" do
-        list do
-          * "Something"
-          * "In a list"
-          * "I hope, the star can be used as method name"
-          * "But since we are driving ruby, I don't see any problems"
-          * "With this ^^"
-        end
-      end
-    end
+=slides do
+  =slide "hello world", :plain do
+    =text do
+      * iochdfksla
+      * sfdsf
+    =sec "section", :notice do
+      Dies ist die Einleitung
+    =sec do
+      Nö, da fehlt nix
+----
 
-    slide "Vertical centering" do
-      box "This content is vertical centered", :vcenter => true do
-        text "This is the box content"
-      end
-    end
 
-    slide "Syntax highlighting" do
-      box "Syntax highlighting is very simple:" do
-        code :ruby, <<-EOC
-          class Syntax
-            def case_sensitive
-              true
-            end
-          end
-        EOC
-      end
-    end
 
-    slide "Boxes" do
-      box do
-        text "A box can be used without a title, too."
-      end
-    end
-  end
-end
