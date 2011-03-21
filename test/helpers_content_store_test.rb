@@ -19,6 +19,16 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
       assert_equal "<div class='something'></div>\n", cs.content(:about)
       assert_equal "<div class='other'></div>\n", cs.content(:slides)
     end
+
+    test "content should also accept a html string" do
+      haml = <<-EOC
+-content :string, "the content"
+      EOC
+      cs = ContentStore.new(haml)
+      cs.render!
+
+      assert_equal "the content\n", cs.content(:string)
+    end
   end
 
   context "plugins" do
