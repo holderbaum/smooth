@@ -13,15 +13,15 @@ class SmoothHelpersSlidesTest < Test::Unit::TestCase
   end
 
   test "it should provide a slides helper" do
-    haml = <<-EOC
--slides do
-  .something
+    haml = <<-EOC.unindent
+      -slides do
+        .something
     EOC
 
-    result = <<-EOC
-<div class='slides'>
-  <div class='something'></div>
-</div>
+    result = <<-EOC.unindent
+      <div class='slides'>
+        <div class='something'></div>
+      </div>
 
     EOC
 

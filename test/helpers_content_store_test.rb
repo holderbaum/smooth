@@ -6,12 +6,12 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
 
   context "rendering" do
     test "it should render a haml file into content_stores" do
-      haml = <<-EOC
--content :about do
-  .something
-.this_is_ignored
--content :slides do
-  .other
+      haml = <<-EOC.unindent
+        -content :about do
+          .something
+        .this_is_ignored
+        -content :slides do
+          .other
       EOC
       cs = ContentStore.new(haml)
       cs.render!
@@ -21,8 +21,8 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
     end
 
     test "content should also accept a html string" do
-      haml = <<-EOC
--content :string, "the content"
+      haml = <<-EOC.unindent
+        -content :string, "the content"
       EOC
       cs = ContentStore.new(haml)
       cs.render!

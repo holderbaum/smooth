@@ -12,14 +12,14 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
   end
 
   test "it should set meta attributes" do
-    haml = <<-EOC
--about do
-  -title    "the title"
-  -author   "the author"
-  -company  "the company"
-  -email    "the email"
-  -date     "the date"
-  -venue    "the venue"
+    haml = <<-EOC.unindent
+      -about do
+        -title    "the title"
+        -author   "the author"
+        -company  "the company"
+        -email    "the email"
+        -date     "the date"
+        -venue    "the venue"
     EOC
 
     result = {
@@ -36,9 +36,9 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
   end
 
   test "about attributes should be accessible" do
-    haml = <<-EOC
--about do
-  -title    "the title"
+    haml = <<-EOC.unindent
+      -about do
+        -title    "the title"
     EOC
 
     cs = content_store(haml)

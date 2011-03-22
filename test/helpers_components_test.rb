@@ -31,12 +31,12 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     end
 
     test "it should render components from both pathes" do
-      haml = <<-EOC
--content :test1 do
-  =component :comp1
+      haml = <<-EOC.unindent
+        -content :test1 do
+          =component :comp1
 
--content :test2 do
-  =component :comp2
+        -content :test2 do
+          =component :comp2
       EOC
 
       cs = content_store(haml)
@@ -45,9 +45,9 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     end
 
     test "it should throw an exception if no component was found" do
-      haml = <<-EOC
--content :test do
-  =component :no_component
+      haml = <<-EOC.unindent
+        -content :test do
+          =component :no_component
       EOC
 
       e = assert_raise(RuntimeError, "aa") do
@@ -58,16 +58,16 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     end
 
     test "it should render an optional block" do
-      haml = <<-EOC
--content :test do
-  =component :with_block do
-    .content
+      haml = <<-EOC.unindent
+        -content :test do
+          =component :with_block do
+            .content
       EOC
 
-      result = <<-EOC
-<div class='with_block'>
-  <div class='content'></div>
-</div>
+      result = <<-EOC.unindent
+        <div class='with_block'>
+          <div class='content'></div>
+        </div>
       EOC
 
       cs = content_store(haml)
@@ -75,17 +75,17 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     end
 
     test "it should instantiate the given arguments" do
-      haml = <<-EOC
--content :test do
-  =component :with_block_and_arg, :arg => 'value' do
-    .content= "my content"
+      haml = <<-EOC.unindent
+        -content :test do
+          =component :with_block_and_arg, :arg => 'value' do
+            .content= "my content"
       EOC
 
-      result = <<-EOC
-<div class='with_block_and_arg'>
-  value
-  <div class='content'>my content</div>
-</div>
+      result = <<-EOC.unindent
+        <div class='with_block_and_arg'>
+          value
+          <div class='content'>my content</div>
+        </div>
       EOC
 
       cs = content_store(haml)
@@ -93,15 +93,15 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     end
 
     test "it should render component without block" do
-      haml = <<-EOC
--content :test do
-  =component :with_block
+      haml = <<-EOC.unindent
+        -content :test do
+          =component :with_block
       EOC
 
-      result = <<-EOC
-<div class='with_block'>
-  
-</div>
+      result = <<-EOC.unindent
+        <div class='with_block'>
+          
+        </div>
       EOC
 
       cs = content_store(haml)
@@ -109,16 +109,16 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     end
 
     test "it should render component without block and argument" do
-      haml = <<-EOC
--content :test do
-  =component :with_block_and_arg, :arg => "something"
+      haml = <<-EOC.unindent
+        -content :test do
+          =component :with_block_and_arg, :arg => "something"
       EOC
 
-      result = <<-EOC
-<div class='with_block_and_arg'>
-  something
-  
-</div>
+      result = <<-EOC.unindent
+        <div class='with_block_and_arg'>
+          something
+          
+        </div>
       EOC
 
       cs = content_store(haml)
@@ -126,21 +126,21 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     end
 
     test "it should be nestable" do
-      haml = <<-EOC
--content :test do
-  =component :with_block do
-    .content
-    =component :with_block do
-      .nested
+      haml = <<-EOC.unindent
+        -content :test do
+          =component :with_block do
+            .content
+            =component :with_block do
+              .nested
       EOC
 
-      result = <<-EOC
-<div class='with_block'>
-  <div class='content'></div>
-  <div class='with_block'>
-    <div class='nested'></div>
-  </div>
-</div>
+      result = <<-EOC.unindent
+        <div class='with_block'>
+          <div class='content'></div>
+          <div class='with_block'>
+            <div class='nested'></div>
+          </div>
+        </div>
       EOC
 
       cs = content_store(haml)
