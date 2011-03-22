@@ -16,6 +16,10 @@ module Smooth
             @content[title]
           end
         end
+
+        def method_missing(meth, *args, &block)
+          component_resolver( *([meth, args].flatten), &block )
+        end
       end
 
       def self.register_helpers(mod)
