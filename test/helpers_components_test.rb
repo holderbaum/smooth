@@ -11,11 +11,13 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     cs
   end
 
-  test "it should render components from both pathes" do
+  setup do
     Smooth::Helpers::Components::PATH = []
     Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path1", __FILE__)
     Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path2", __FILE__)
+  end
 
+  test "it should render components from both pathes" do
     haml = <<-EOC
 -content :test1 do
   =component :comp1
@@ -29,10 +31,7 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     assert_equal "<div class='comp2'></div>\n", cs.content(:test2)
   end
 
-  test "it should throw an exception of no component was found" do
-    Smooth::Helpers::Components::PATH = []
-    Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path1", __FILE__)
-
+  test "it should throw an exception if no component was found" do
     haml = <<-EOC
 -content :test do
   =component :no_component
@@ -46,9 +45,6 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
   end
 
   test "it should render an optional block" do
-    Smooth::Helpers::Components::PATH = []
-    Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path1", __FILE__)
-
     haml = <<-EOC
 -content :test do
   =component :with_block do
@@ -58,6 +54,57 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     result = <<-EOC
 <div class='with_block'>
   <div class='content'></div>
+</div>
+    EOC
+
+    cs = content_store(haml)
+    assert_equal result, cs.content(:test)
+  end
+
+  test "it should instantiate the given arguments" do
+    haml = <<-EOC
+-content :test do
+  =component :with_block_and_arg, :arg => 'value' do
+    .content= "my content"
+    EOC
+
+    result = <<-EOC
+<div class='with_block_and_arg'>
+  value
+  <div class='content'>my content</div>
+</div>
+    EOC
+
+    cs = content_store(haml)
+    assert_equal result, cs.content(:test)
+  end
+
+  test "it should render component without block" do
+    haml = <<-EOC
+-content :test do
+  =component :with_block
+    EOC
+
+    result = <<-EOC
+<div class='with_block'>
+  
+</div>
+    EOC
+
+    cs = content_store(haml)
+    assert_equal result, cs.content(:test)
+  end
+
+  test "it should render component without block and argument" do
+    haml = <<-EOC
+-content :test do
+  =component :with_block_and_arg, :arg => "something"
+    EOC
+
+    result = <<-EOC
+<div class='with_block_and_arg'>
+  something
+  
 </div>
     EOC
 
