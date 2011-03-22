@@ -45,4 +45,37 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
       assert_equal "return", cs.context.weird_method_name
     end
   end
+
+  context "method missing" do
+    setup do
+      @old_path = Smooth::Helpers::Components::PATH
+      Smooth::Helpers::Components::PATH = []
+      Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path1", __FILE__)
+      Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path2", __FILE__)
+    end
+
+    teardown do
+      Smooth::Helpers::Components::PATH = @old_path
+    end
+
+    test "it should wrap component_resolver with method_missing" do
+      haml = <<-EOC.unindent
+        -content :test1 do
+          =missing "the title" do
+            .stuff
+      EOC
+
+      result = <<-EOC.unindent
+        <div class='missing'>
+          the title
+          <div class='stuff'></div>
+        </div>
+      EOC
+
+      ContentStore.register_helpers( Smooth::Helpers::Components )
+      cs = ContentStore.new(haml)
+      cs.render!
+      assert_equal result, cs.context.content(:test1)
+    end
+  end
 end
