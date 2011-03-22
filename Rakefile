@@ -17,6 +17,7 @@ begin
     s.homepage = "http://techfolio.de"
     s.authors = ["Jakob Holderbaum"]
     s.files.exclude 'src'
+    s.executables = ["smooth"]
   end
 
   Jeweler::RubygemsDotOrgTasks.new
