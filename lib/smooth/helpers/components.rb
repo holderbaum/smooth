@@ -7,9 +7,14 @@ module Smooth
         PATH.each do |path|
           if File.exist?(file = File.join(path, "#{name.to_s}.haml"))
             if block_given?
-              return Haml::Engine.new(File.read(file)).render(self, :content => capture_haml(&block))
+              puts arguments
+              return Haml::Engine.new(File.read(file)).render(self, arguments) do
+                capture_haml &block 
+              end
             else
-              return Haml::Engine.new(File.read(file)).render
+              return Haml::Engine.new(File.read(file)).render(self, arguments) do
+                # empty block for yield
+              end
             end
           end
         end
