@@ -146,5 +146,82 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
       cs = content_store(haml)
       assert_equal result, cs.content(:test)
     end
+
+    context "component_resolver" do
+      test "it should map *args to a component call" do
+        haml = <<-EOC.unindent
+          - content :test do 
+            =component_resolver :with_block_and_arg_and_title, "my title", :arg => "argument", :arg2 => "bla" do
+              .inner
+        EOC
+
+        result = <<-EOC.unindent
+          <div class='with_block_and_arg_and_title'>
+            my title
+            argument
+            <div class='inner'></div>
+          </div>
+        EOC
+
+        cs = content_store(haml)
+        assert_equal result, cs.content(:test)
+      end
+
+      test "it should map *args without argument hashto a component call" do
+        haml = <<-EOC.unindent
+          - content :test do 
+            =component_resolver :with_block_and_title, "my title" do
+              .inner
+        EOC
+
+        result = <<-EOC.unindent
+          <div class='with_block_and_title'>
+            my title
+            <div class='inner'></div>
+          </div>
+        EOC
+
+        cs = content_store(haml)
+        assert_equal result, cs.content(:test)
+      end
+
+      test "it should map *args without argument hash and title to a component call" do
+        haml = <<-EOC.unindent
+          - content :test do 
+            =component_resolver :with_block_and_title do
+              .inner
+        EOC
+
+        result = <<-EOC.unindent
+          <div class='with_block_and_title'>
+            
+            <div class='inner'></div>
+          </div>
+        EOC
+
+        cs = content_store(haml)
+        assert_equal result, cs.content(:test)
+      end
+
+      test "it should map *args without title to a component call" do
+        haml = <<-EOC.unindent
+          - content :test do 
+            =component_resolver :with_block_and_arg_and_title, :arg => "argument", :arg2 => "bla" do
+              .inner
+        EOC
+
+        result = <<-EOC.unindent
+          <div class='with_block_and_arg_and_title'>
+            
+            argument
+            <div class='inner'></div>
+          </div>
+        EOC
+
+        cs = content_store(haml)
+        assert_equal result, cs.content(:test)
+      end
+
+    end
   end
 end
