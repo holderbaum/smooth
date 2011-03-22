@@ -21,6 +21,18 @@ module Smooth
         raise "Component not found."
       end
 
+      def component_resolver(*args, &block)
+        name = args.shift
+        if args.size != 0 and !args[0].is_a?(Hash)
+          title = args.shift
+        else
+          title = ""
+        end
+        options = args.last || {}
+        options.merge!( :title => title )
+
+        component name, options, &block
+      end
     end
   end
 end
