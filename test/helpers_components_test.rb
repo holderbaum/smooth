@@ -20,9 +20,14 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
 
   context "PATH set by setup" do
     setup do
+      @old_path = Smooth::Helpers::Components::PATH
       Smooth::Helpers::Components::PATH = []
       Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path1", __FILE__)
       Smooth::Helpers::Components::PATH << File.expand_path("../fixtures/components/path2", __FILE__)
+    end
+
+    teardown do
+      Smooth::Helpers::Components::PATH = @old_path
     end
 
     test "it should render components from both pathes" do
