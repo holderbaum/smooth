@@ -124,5 +124,27 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
       cs = content_store(haml)
       assert_equal result, cs.content(:test)
     end
+
+    test "it should be nestable" do
+      haml = <<-EOC
+-content :test do
+  =component :with_block do
+    .content
+    =component :with_block do
+      .nested
+      EOC
+
+      result = <<-EOC
+<div class='with_block'>
+  <div class='content'></div>
+  <div class='with_block'>
+    <div class='nested'></div>
+  </div>
+</div>
+      EOC
+
+      cs = content_store(haml)
+      assert_equal result, cs.content(:test)
+    end
   end
 end
