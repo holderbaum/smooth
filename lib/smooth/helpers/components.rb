@@ -1,7 +1,7 @@
 module Smooth
   module Helpers
     module Components
-      PATH = []
+      PATH = [ File.expand_path("../../../../comp", __FILE__) ]
 
       def component(name, arguments = {}, &block)
         PATH.each do |path|
