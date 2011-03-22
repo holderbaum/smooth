@@ -16,8 +16,8 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
       cs = ContentStore.new(haml)
       cs.render!
 
-      assert_equal "<div class='something'></div>\n", cs.content(:about)
-      assert_equal "<div class='other'></div>\n", cs.content(:slides)
+      assert_equal "<div class='something'></div>\n", cs.context.content(:about)
+      assert_equal "<div class='other'></div>\n", cs.context.content(:slides)
     end
 
     test "content should also accept a html string" do
@@ -27,7 +27,7 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
       cs = ContentStore.new(haml)
       cs.render!
 
-      assert_equal "the content\n", cs.content(:string)
+      assert_equal "the content\n", cs.context.content(:string)
     end
   end
 
