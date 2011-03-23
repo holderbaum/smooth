@@ -1,5 +1,6 @@
 require 'test/helper'
 require 'lib/smooth'
+require 'fileutils'
 
 class SmoothHelpersComponentsTest < Test::Unit::TestCase
   include Smooth::Helpers
@@ -11,9 +12,15 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     cs
   end
 
+  TEST_DIR = File.expand_path('../fixtures/test_dir', __FILE__)
+
   def in_test_dir(&block)
-    path = File.expand_path('../fixtures/test_dir', __FILE__)
-    Dir.chdir(path, &block)
+    Dir.chdir(TEST_DIR, &block)
+  end
+
+  def clear_test_dir
+    files = Dir.glob(File.join TEST_DIR, "*")
+    FileUtils.rm_rf files
   end
 
   context "no setup" do
@@ -35,11 +42,71 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     teardown do
       Smooth::Helpers::Assets::BASE_PATH = @old_base_path
       Smooth::Helpers::Assets::JS_PATH = @old_js_path
+      clear_test_dir
     end
 
-    context "js_include" do
+    context "copy_asset" do
+
+      test "it should copy the asset file" do
+        clear_test_dir
+        in_test_dir do
+          haml = <<-EOC.unindent
+            -content :test1 do
+              -copy_asset 'js/example.js'
+
+            -content :test2 do
+              -copy_asset 'js/subdir/example.js'
+          EOC
+
+          cs = content_store(haml)
+          assert File.exist?('js/example.js'), 'js/example.js'
+          assert File.exist?('js/subdir/example.js'), 'js/subdir/example.js'
+        end
+      end
+
+      test "it should not fail if the asset dirs exist" do
+        clear_test_dir
+        in_test_dir do
+          FileUtils.mkdir_p 'css/subdir'
+
+          haml = <<-EOC.unindent
+            -content :test1 do
+              -copy_asset 'css/example.css'
+
+            -content :test2 do
+              -copy_asset 'css/subdir/example.css'
+          EOC
+
+          cs = content_store(haml)
+          assert File.exist?('css/example.css'), 'css/example.css'
+          assert File.exist?('css/subdir/example.css'), 'css/subdir/example.css'
+        end
+      end
+
+      test "it should not override asset files" do
+        clear_test_dir
+        in_test_dir do
+          FileUtils.mkdir_p 'js/subdir'
+          File.open('js/example.js', 'w') do |js|
+            js << "foo"
+          end
+
+          haml = <<-EOC.unindent
+            -content :test1 do
+              -copy_asset 'js/example.js'
+          EOC
+
+          cs = content_store(haml)
+          assert File.exist?('js/example.js'), 'js/example.js'
+          assert_equal "foo", File.read('js/example.js')
+        end
+      end
+
+    end
       
+    context "js_include" do
       test "it should include the js files" do
+        clear_test_dir
         in_test_dir do
           haml = <<-EOC.unindent
             -content :test1 do
@@ -60,20 +127,6 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
           cs = content_store(haml)
           assert_equal test1, cs.content(:test1)
           assert_equal test2, cs.content(:test2)
-        end
-      end
-
-      test "it should include the js files" do
-        in_test_dir do
-          haml = <<-EOC.unindent
-            -content :test1 do
-              -js_include :example
-
-            -content :test2 do
-              -js_include :subdir, :example
-          EOC
-
-          cs = content_store(haml)
         end
       end
 
