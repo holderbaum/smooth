@@ -28,4 +28,21 @@ class SmoothHelpersSlidesTest < Test::Unit::TestCase
     cs = content_store(haml)
     assert_equal result, cs.context.content(:slides)
   end
+
+  test "the slides helper should also be used in the layout" do
+    haml = <<-EOC.unindent
+      -slides do
+        .something
+    EOC
+
+    result = <<-EOC.unindent
+      <div class='slides'>
+        <div class='something'></div>
+      </div>
+
+    EOC
+
+    cs = content_store(haml)
+    assert_equal result, cs.context.slides
+  end
 end
