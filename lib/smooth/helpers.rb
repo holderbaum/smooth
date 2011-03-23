@@ -12,5 +12,8 @@ module Smooth
     require 'smooth/helpers/components'
     ContentStore.register_helpers Components
 
+    require 'smooth/helpers/assets'
+    ContentStore.register_helpers Assets
+
   end
 end
