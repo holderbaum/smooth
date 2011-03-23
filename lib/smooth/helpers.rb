@@ -1,4 +1,16 @@
 require 'smooth/helpers/content_store'
-require 'smooth/helpers/about'
-require 'smooth/helpers/slides'
-require 'smooth/helpers/components'
+
+module Smooth
+  module Helpers
+
+    require 'smooth/helpers/about'
+    ContentStore.register_helpers About
+
+    require 'smooth/helpers/slides'
+    ContentStore.register_helpers Slides
+
+    require 'smooth/helpers/components'
+    ContentStore.register_helpers Components
+
+  end
+end
