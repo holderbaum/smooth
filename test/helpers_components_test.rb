@@ -54,7 +54,7 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
         cs = content_store(haml)
       end
 
-      assert_equal "Component not found.", e.message
+      assert_equal "Component 'no_component' not found.", e.message
     end
 
     test "it should render an optional block" do

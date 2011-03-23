@@ -18,7 +18,7 @@ module Smooth
             end
           end
         end
-        raise "Component not found."
+        raise "Component '#{name}' not found."
       end
 
       def component_resolver(*args, &block)
