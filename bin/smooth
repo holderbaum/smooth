@@ -9,17 +9,12 @@ result_file = File.join(result_dir, 'index.html')
 
 unless File.exist? layout
   puts "please create layout.haml"
-  puts layout
   exit 1
 end
 
 unless File.exist? content
   puts "please create content.haml"
   exit 1
-end
-
-unless Dir.exists? result_dir
-  Dir.mkdir(result_dir)
 end
 
 base = Smooth::Base.new(File.read(layout))
