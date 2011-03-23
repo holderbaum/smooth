@@ -45,6 +45,29 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
       clear_test_dir
     end
 
+    context "convert_path_array_to_path" do
+
+      test "expand path with implicit file_type" do
+        haml = <<-EOC
+          -content :test do
+            =convert_path_array_to_path('js', [:my, :file])
+        EOC
+
+        cs = content_store(haml)
+
+        assert_equal 'js/my/file.js', cs.content(:test)
+      end
+
+      test "expand path with explicit file_type" do
+        assert_equal 'style/my/file.css', convert_path_array_to_path('style', [:my, :file], 'css') 
+      end
+
+      test "don't apply file_type twice" do
+        assert_equal 'js/my/file.js', convert_path_array_to_path('js', [:my, "file.js"]) 
+      end
+
+    end
+
     context "copy_asset" do
 
       test "it should copy the asset file" do
