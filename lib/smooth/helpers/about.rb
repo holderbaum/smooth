@@ -12,6 +12,7 @@ module Smooth
         @about
       end
 
+      # TODO: method missing is our friend here
       def title(s)
         @about[:title] = s
       end
