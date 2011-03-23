@@ -37,13 +37,44 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
       Smooth::Helpers::Assets::JS_PATH = @old_js_path
     end
 
-    context "js" do
+    context "js_include" do
       
-      test "it should copy the js file and include it" do
+      test "it should include the js files" do
         in_test_dir do
-          puts Dir.pwd
+          haml = <<-EOC.unindent
+            -content :test1 do
+              -js_include :example
+
+            -content :test2 do
+              -js_include :subdir, :example
+          EOC
+
+          test1 = <<-EOC.unindent
+            <script src='js/example.js'></script>
+          EOC
+
+          test2 = <<-EOC.unindent
+            <script src='js/subdir/example.js'></script>
+          EOC
+
+          cs = content_store(haml)
+          assert_equal test1, cs.content(:test1)
+          assert_equal test2, cs.content(:test2)
         end
-        puts Dir.pwd
+      end
+
+      test "it should include the js files" do
+        in_test_dir do
+          haml = <<-EOC.unindent
+            -content :test1 do
+              -js_include :example
+
+            -content :test2 do
+              -js_include :subdir, :example
+          EOC
+
+          cs = content_store(haml)
+        end
       end
 
     end
