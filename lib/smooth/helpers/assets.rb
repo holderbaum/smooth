@@ -4,11 +4,24 @@ module Smooth
       BASE_PATH = File.expand_path('../../../../assets', __FILE__)
       JS_PATH = File.join(BASE_PATH, 'js')
 
-      def js_include(*args)
-        path = ['js'].concat(args).map(&:to_s)
+      def copy_asset(path)
+        FileUtils.mkdir_p File.join(Dir.pwd, File.dirname(path) )
 
-        path.last << '.js'
-        path = File.join(path)
+        from = File.join(BASE_PATH, path)
+        to =  File.join(Dir.pwd, path)
+
+        FileUtils.cp from, to unless File.exist? to
+      end
+
+      def convert_path_array_to_path(prefix, array, file_type = prefix)
+        path = array.map(&:to_s)
+        path.last << ".#{file_type}"
+        File.join path.unshift(prefix)
+      end
+
+      def js_include(*args)
+        path = convert_path_array_to_path 'js', args
+        copy_asset path
 
         haml_tag 'script', :src => path
       end
