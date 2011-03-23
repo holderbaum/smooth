@@ -1,5 +1,10 @@
 #!/usr/bin/env watchr
 
+NOTIFY = true
+if ARGV[1] and ARGV[1] == "shell"
+  NOTIFY = false
+end
+
 LIBNOTIFY_OPTIONS = {
   :green => {
     :icon_path => "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg",
@@ -16,13 +21,15 @@ LIBNOTIFY_OPTIONS = {
 }
 
 def notify(message)
-  require 'libnotify'
+  if NOTIFY
+    require 'libnotify'
 
-  color = message =~ /(.*0 failures, 0 errors.*)/ ? :green : :red
+    color = message =~ /(.*0 failures, 0 errors.*)/ ? :green : :red
 
-  Libnotify.show(LIBNOTIFY_OPTIONS[color]) do |notify|
-    notify.body = color == :red ? message : $1
-    notify.append = true
+    Libnotify.show(LIBNOTIFY_OPTIONS[color]) do |notify|
+      notify.body = color == :red ? message : $1
+      notify.append = true
+    end
   end
 rescue LoadError => e
 ensure
