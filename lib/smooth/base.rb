@@ -10,7 +10,7 @@ module Smooth
       content_store = ContentStore.new(content)
       content_store.render!
 
-      Haml::Engine.new(@layout).render(content_store)
+      Haml::Engine.new(@layout).render(content_store.context)
     end
 
   end
