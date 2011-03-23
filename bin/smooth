@@ -4,8 +4,6 @@ require 'smooth'
 
 layout  = File.expand_path('layout.haml')
 content = File.expand_path('content.haml')
-result_dir  = File.expand_path('out')
-result_file = File.join(result_dir, 'index.html')
 
 unless File.exist? layout
   puts "please create layout.haml"
