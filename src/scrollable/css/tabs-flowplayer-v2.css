@@ -1,0 +1,40 @@
+body {
+    background: black;
+}
+
+/* panes */
+#flowpanes {
+	background: url(../img/slide-bg.jpg) no-repeat;		
+	width:760px;
+	height:450px;	
+}
+
+
+/* single pane */
+#flowpanes div {
+	display:none;	
+	color: #909090;	
+	margin:20px 40px;
+}
+
+/* some decorations for elements inside single pane */
+#flowpanes div h2 {
+	font-weight:normal;
+	color: #404040;
+	letter-spacing:1px;
+	margin:10px 0 0 0;
+	font-size:22px;	
+}
+
+#flowpanes a {
+	color: #CDC673;		
+	font-size: 14px;
+}
+
+#flowpanes p, #flowpanes samp {
+	color: #909090;		
+}
+
+#flowpanes .narrow {
+	padding-right:160px;		
+}
