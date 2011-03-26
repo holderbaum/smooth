@@ -3,11 +3,22 @@ module Smooth
     module Components
       PATH = [ File.expand_path("../../../../comp", __FILE__) ]
 
+      def self.path(new_path = nil)
+        if new_path
+          @path = new_path
+        else
+          @path ||= PATH
+        end
+      end
+
+      def self.reset_path!
+        @path = nil
+      end
+
       def component(name, arguments = {}, &block)
-        PATH.each do |path|
+        Components.path.each do |path|
           if File.exist?(file = File.join(path, "#{name.to_s}.haml"))
             if block_given?
-              puts arguments
               return Haml::Engine.new(File.read(file)).render(self, arguments) do
                 capture_haml &block 
               end
