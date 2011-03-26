@@ -12,16 +12,6 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     cs
   end
 
-  TEST_DIR = File.expand_path('../fixtures/test_dir', __FILE__)
-
-  def in_test_dir(&block)
-    Dir.chdir(TEST_DIR, &block)
-  end
-
-  def clear_test_dir
-    files = Dir.glob(File.join TEST_DIR, "*")
-    FileUtils.rm_rf files
-  end
 
   context "no setup" do
     test "it should set the correct path" do
