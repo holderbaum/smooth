@@ -1,4 +1,5 @@
 require 'smooth/helpers/content_store'
+require 'fileutils'
 
 module Smooth
   module Helpers
