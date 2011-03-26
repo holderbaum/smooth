@@ -5,8 +5,12 @@ module Smooth
       @template = template
     end
 
-    def render
+    def render!
       Haml::Engine.new(@template).render
+    end
+
+    def result
+      @result ||= render!
     end
 
   end

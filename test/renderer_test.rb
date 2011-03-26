@@ -19,7 +19,7 @@ class SmoothRendererTest < Test::Unit::TestCase
       EOC
 
       r = Smooth::Renderer.new(template)
-      assert_equal html, r.render
+      assert_equal html, r.result
     end
 
   end
