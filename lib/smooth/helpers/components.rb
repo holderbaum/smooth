@@ -11,6 +11,15 @@ module Smooth
         end
       end
 
+      def self.clear_pathes!
+        @pathes = []
+      end
+
+      def self.unshift_pathes(path)
+        pathes.unshift path
+      end
+
+
       def self.reset_pathes!
         @pathes = nil
       end

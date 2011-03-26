@@ -51,7 +51,10 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
       new_pathes = []
       new_pathes << File.expand_path("../fixtures/components/path1", __FILE__)
       new_pathes << File.expand_path("../fixtures/components/path2", __FILE__)
-      Smooth::Helpers::Components.pathes(new_pathes)
+
+      Smooth::Helpers::Components.clear_pathes!
+      Smooth::Helpers::Components.unshift_pathes new_pathes[0]
+      Smooth::Helpers::Components.unshift_pathes new_pathes[1]
     end
 
     teardown do
