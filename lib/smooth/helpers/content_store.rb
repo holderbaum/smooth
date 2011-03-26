@@ -28,14 +28,14 @@ module Smooth
 
       attr_reader :context
 
-      def initialize(layout)
+      def initialize(template)
         @content = {}
         @context = RenderContext.new
-        @layout = layout 
+        @template = template 
       end
       
       def render!
-        Haml::Engine.new(@layout).render(@context)
+        Haml::Engine.new(@template).render(@context)
       end
 
       def content(title)
