@@ -4,11 +4,10 @@ require 'lib/smooth'
 class SmoothHelpersAboutTest < Test::Unit::TestCase
   include Smooth::Helpers
 
-  def content_store(haml)
-    ContentStore.register_helpers Smooth::Helpers::About
-    cs = ContentStore.new(haml)
-    cs.render!
-    cs
+  def renderer_context(haml)
+    r = renderer(haml, nil, Smooth::Helpers::About)
+    r.result
+    r.context
   end
 
   test "it should set meta attributes" do
@@ -31,8 +30,7 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
       :venue => "the venue"
     }
 
-    cs = content_store(haml)
-    assert_equal result, cs.context.about
+    assert_equal result, renderer_context(haml).about
   end
 
   test "about attributes should be accessible" do
@@ -41,7 +39,6 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
         -title    "the title"
     EOC
 
-    cs = content_store(haml)
-    assert_equal "the title", cs.context.about(:title)
+    assert_equal "the title", renderer_context(haml).about(:title)
   end
 end
