@@ -2,6 +2,7 @@ module Smooth
   class Renderer
 
     attr_writer :layout
+    attr_reader :context
 
     def initialize(template)
       @template = template
