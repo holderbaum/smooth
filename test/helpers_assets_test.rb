@@ -2,14 +2,6 @@ require 'test/helper'
 require 'lib/smooth'
 
 class SmoothHelpersComponentsTest < Test::Unit::TestCase
-  include Smooth::Helpers
-
-  def content_store(haml)
-    ContentStore.register_helpers Smooth::Helpers::Assets
-    cs = ContentStore.new(haml)
-    cs.render!
-    cs
-  end
 
   def renderer_result(haml)
     r = renderer(haml, nil, Smooth::Helpers::Assets)
