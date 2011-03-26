@@ -11,6 +11,11 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     cs
   end
 
+  def renderer_result(haml)
+    r = renderer(haml, nil, Smooth::Helpers::Assets)
+    r.result
+  end
+
 
   context "no setup" do
     test "it should set the correct path" do
@@ -37,35 +42,29 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
 
       test "expand path with implicit file_type" do
         haml = <<-EOC.unindent
-          -content :test do
-            =convert_path_array_to_path('js', [:my, :file])
+          =convert_path_array_to_path('js', [:my, :file])
         EOC
 
-        cs = content_store(haml)
-
-        assert_equal "js/my/file.js\n", cs.content(:test)
+        r = renderer_result(haml)
+        assert_equal "js/my/file.js\n", r
       end
 
       test "expand path with explicit file_type" do
         haml = <<-EOC.unindent
-          -content :test do
-            =convert_path_array_to_path('style', [:my, :file], 'css')
+          =convert_path_array_to_path('style', [:my, :file], 'css')
         EOC
 
-        cs = content_store(haml)
-
-        assert_equal "style/my/file.css\n", cs.content(:test)
+        r = renderer_result(haml)
+        assert_equal "style/my/file.css\n", r
       end
 
       test "don't apply file_type twice" do
         haml = <<-EOC.unindent
-          -content :test do
-            =convert_path_array_to_path('js', [:my, 'file.js'])
+          =convert_path_array_to_path('js', [:my, 'file.js'])
         EOC
 
-        cs = content_store(haml)
-
-        assert_equal "js/my/file.js\n", cs.content(:test)
+        r = renderer_result(haml)
+        assert_equal "js/my/file.js\n", r
       end
 
     end
@@ -76,14 +75,11 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
         clear_test_dir
         in_test_dir do
           haml = <<-EOC.unindent
-            -content :test1 do
-              -copy_asset 'js/example.js'
-
-            -content :test2 do
-              -copy_asset 'js/subdir/example.js'
+            -copy_asset 'js/example.js'
+            -copy_asset 'js/subdir/example.js'
           EOC
 
-          cs = content_store(haml)
+          r = renderer_result(haml)
           assert File.exist?('js/example.js'), 'js/example.js'
           assert File.exist?('js/subdir/example.js'), 'js/subdir/example.js'
         end
@@ -95,14 +91,11 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
           FileUtils.mkdir_p 'css/subdir'
 
           haml = <<-EOC.unindent
-            -content :test1 do
-              -copy_asset 'style/example.css'
-
-            -content :test2 do
-              -copy_asset 'style/subdir/example.css'
+            -copy_asset 'style/example.css'
+            -copy_asset 'style/subdir/example.css'
           EOC
 
-          cs = content_store(haml)
+          r = renderer_result(haml)
           assert File.exist?('style/example.css'), 'style/example.css'
           assert File.exist?('style/subdir/example.css'), 'style/subdir/example.css'
         end
@@ -117,11 +110,11 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
           end
 
           haml = <<-EOC.unindent
-            -content :test1 do
-              -copy_asset 'js/example.js'
+            -copy_asset 'js/example.js'
           EOC
 
-          cs = content_store(haml)
+          r = renderer_result(haml)
+          
           assert File.exist?('js/example.js'), 'js/example.js'
           assert_equal "foo", File.read('js/example.js')
         end
@@ -134,24 +127,17 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
         clear_test_dir
         in_test_dir do
           haml = <<-EOC.unindent
-            -content :test1 do
-              -js_include :example
-
-            -content :test2 do
-              -js_include :subdir, :example
+            -js_include :example
+            -js_include :subdir, :example
           EOC
 
-          test1 = <<-EOC.unindent
+          test = <<-EOC.unindent
             <script src='js/example.js'></script>
-          EOC
-
-          test2 = <<-EOC.unindent
             <script src='js/subdir/example.js'></script>
           EOC
 
-          cs = content_store(haml)
-          assert_equal test1, cs.content(:test1)
-          assert_equal test2, cs.content(:test2)
+          r = renderer_result(haml)
+          assert_equal test, r
         end
       end
 
@@ -162,24 +148,17 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
         clear_test_dir
         in_test_dir do
           haml = <<-EOC.unindent
-            -content :test1 do
-              -css_include :example
-
-            -content :test2 do
-              -css_include :subdir, :example
+            -css_include :example
+            -css_include :subdir, :example
           EOC
 
-          test1 = <<-EOC.unindent
+          test = <<-EOC.unindent
             <link href='style/example.css' rel='stylesheet' type='text/css' />
-          EOC
-
-          test2 = <<-EOC.unindent
             <link href='style/subdir/example.css' rel='stylesheet' type='text/css' />
           EOC
 
-          cs = content_store(haml)
-          assert_equal test1, cs.content(:test1)
-          assert_equal test2, cs.content(:test2)
+          r = renderer_result(haml)
+          assert_equal test, r
         end
       end
 
