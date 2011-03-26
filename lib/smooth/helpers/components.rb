@@ -1,22 +1,22 @@
 module Smooth
   module Helpers
     module Components
-      PATH = [ File.expand_path("../../../../comp", __FILE__) ]
+      PATHES = [ File.expand_path("../../../../comp", __FILE__) ]
 
-      def self.path(new_path = nil)
-        if new_path
-          @path = new_path
+      def self.pathes(new_pathes = nil)
+        if new_pathes
+          @pathes = Array(new_pathes)
         else
-          @path ||= PATH
+          @pathes ||= PATHES
         end
       end
 
-      def self.reset_path!
-        @path = nil
+      def self.reset_pathes!
+        @pathes = nil
       end
 
       def component(name, arguments = {}, &block)
-        Components.path.each do |path|
+        Components.pathes.each do |path|
           if File.exist?(file = File.join(path, "#{name.to_s}.haml"))
             if block_given?
               return Haml::Engine.new(File.read(file)).render(self, arguments) do

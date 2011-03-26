@@ -12,26 +12,25 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
   end
 
   context "no setup" do
-    test "it should set the correct path" do
+    test "it should set the correct pathes" do
       path = File.expand_path('../../comp/', __FILE__)
-      assert_equal [path], Smooth::Helpers::Components.path
+      assert_equal [path], Smooth::Helpers::Components.pathes
     end
   end
 
-  context "PATH set by setup" do
+  context "PATHES set by setup" do
     setup do
-      @old_path = Smooth::Helpers::Components.path
-      new_path = []
-      new_path << File.expand_path("../fixtures/components/path1", __FILE__)
-      new_path << File.expand_path("../fixtures/components/path2", __FILE__)
-      Smooth::Helpers::Components.path(new_path)
+      new_pathes = []
+      new_pathes << File.expand_path("../fixtures/components/path1", __FILE__)
+      new_pathes << File.expand_path("../fixtures/components/path2", __FILE__)
+      Smooth::Helpers::Components.pathes(new_pathes)
     end
 
     teardown do
-      Smooth::Helpers::Components.reset_path!
+      Smooth::Helpers::Components.reset_pathes!
 
-      path = File.expand_path('../../comp/', __FILE__)
-      assert_equal [path], Smooth::Helpers::Components.path
+      pathes = [File.expand_path('../../comp/', __FILE__)]
+      assert_equal pathes, Smooth::Helpers::Components.pathes
     end
 
     test "it should render components from both pathes" do

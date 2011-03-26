@@ -48,14 +48,14 @@ class SmoothHelpersContentStoreTest < Test::Unit::TestCase
 
   context "method missing" do
     setup do
-      new_path = []
-      new_path << File.expand_path("../fixtures/components/path1", __FILE__)
-      new_path << File.expand_path("../fixtures/components/path2", __FILE__)
-      Smooth::Helpers::Components.path(new_path)
+      new_pathes = []
+      new_pathes << File.expand_path("../fixtures/components/path1", __FILE__)
+      new_pathes << File.expand_path("../fixtures/components/path2", __FILE__)
+      Smooth::Helpers::Components.pathes(new_pathes)
     end
 
     teardown do
-      Smooth::Helpers::Components.reset_path!
+      Smooth::Helpers::Components.reset_pathes!
     end
 
     test "it should wrap component_resolver with method_missing" do
