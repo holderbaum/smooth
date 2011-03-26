@@ -26,6 +26,13 @@ module Smooth
         haml_tag 'script', :src => path
       end
 
+      def css_include(*args)
+        path = convert_path_array_to_path 'style', args, 'css'
+        copy_asset path
+
+        haml_tag 'link', :rel => 'stylesheet', :type => 'text/css', :href => path
+      end
+
     end
   end
 end

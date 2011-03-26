@@ -108,15 +108,15 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
 
           haml = <<-EOC.unindent
             -content :test1 do
-              -copy_asset 'css/example.css'
+              -copy_asset 'style/example.css'
 
             -content :test2 do
-              -copy_asset 'css/subdir/example.css'
+              -copy_asset 'style/subdir/example.css'
           EOC
 
           cs = content_store(haml)
-          assert File.exist?('css/example.css'), 'css/example.css'
-          assert File.exist?('css/subdir/example.css'), 'css/subdir/example.css'
+          assert File.exist?('style/example.css'), 'style/example.css'
+          assert File.exist?('style/subdir/example.css'), 'style/subdir/example.css'
         end
       end
 
@@ -169,6 +169,33 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
 
     end
 
+    context "css_include" do
+      test "it should include the css files" do
+        clear_test_dir
+        in_test_dir do
+          haml = <<-EOC.unindent
+            -content :test1 do
+              -css_include :example
+
+            -content :test2 do
+              -css_include :subdir, :example
+          EOC
+
+          test1 = <<-EOC.unindent
+            <link href='style/example.css' rel='stylesheet' type='text/css' />
+          EOC
+
+          test2 = <<-EOC.unindent
+            <link href='style/subdir/example.css' rel='stylesheet' type='text/css' />
+          EOC
+
+          cs = content_store(haml)
+          assert_equal test1, cs.content(:test1)
+          assert_equal test2, cs.content(:test2)
+        end
+      end
+
+    end
   end
 
 end
