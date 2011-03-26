@@ -48,22 +48,36 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
     context "convert_path_array_to_path" do
 
       test "expand path with implicit file_type" do
-        haml = <<-EOC
+        haml = <<-EOC.unindent
           -content :test do
             =convert_path_array_to_path('js', [:my, :file])
         EOC
 
         cs = content_store(haml)
 
-        assert_equal 'js/my/file.js', cs.content(:test)
+        assert_equal "js/my/file.js\n", cs.content(:test)
       end
 
       test "expand path with explicit file_type" do
-        assert_equal 'style/my/file.css', convert_path_array_to_path('style', [:my, :file], 'css') 
+        haml = <<-EOC.unindent
+          -content :test do
+            =convert_path_array_to_path('style', [:my, :file], 'css')
+        EOC
+
+        cs = content_store(haml)
+
+        assert_equal "style/my/file.css\n", cs.content(:test)
       end
 
       test "don't apply file_type twice" do
-        assert_equal 'js/my/file.js', convert_path_array_to_path('js', [:my, "file.js"]) 
+        haml = <<-EOC.unindent
+          -content :test do
+            =convert_path_array_to_path('js', [:my, 'file.js'])
+        EOC
+
+        cs = content_store(haml)
+
+        assert_equal "js/my/file.js\n", cs.content(:test)
       end
 
     end
@@ -154,6 +168,7 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
       end
 
     end
+
   end
 
 end
