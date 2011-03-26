@@ -7,7 +7,7 @@ module Smooth
     def initialize(template)
       @template = template
 
-      @context = Context.new
+      @context = Context.new(self)
     end
 
     def render!
@@ -25,6 +25,11 @@ module Smooth
     end
 
     class Context
+
+      def initialize(renderer)
+        @renderer = renderer
+      end
+
       def singleton_class
         class << self; self; end
       end
