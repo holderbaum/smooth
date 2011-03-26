@@ -2,7 +2,6 @@ module Smooth
   module Helpers
     module Assets
       BASE_PATH = File.expand_path('../../../../assets', __FILE__)
-      JS_PATH = File.join(BASE_PATH, 'js')
 
       def copy_asset(path)
         FileUtils.mkdir_p File.join(Dir.pwd, File.dirname(path) )
