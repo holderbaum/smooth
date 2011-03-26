@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] = "test"
 $LOAD_PATH.unshift File.dirname(__FILE__)
 
 require 'contest'
+require 'fileutils'
 
 class String
   def unindent

@@ -1,6 +1,5 @@
 require 'test/helper'
 require 'lib/smooth'
-require 'fileutils'
 
 class SmoothHelpersComponentsTest < Test::Unit::TestCase
   include Smooth::Helpers
