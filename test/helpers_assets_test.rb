@@ -1,23 +1,18 @@
 require 'test/helper'
 require 'lib/smooth'
 
-class SmoothHelpersComponentsTest < Test::Unit::TestCase
+class SmoothHelpersAssetsTest < Test::Unit::TestCase
 
   def renderer_result(haml)
     r = renderer(haml, nil, Smooth::Helpers::Assets)
     r.result
   end
 
-
-  context "no setup" do
-    test "it should set the correct path" do
-      path = File.expand_path('../../assets', __FILE__)
-      assert_equal path, Smooth::Helpers::Assets.base_path
-    end
-  end
-
   context "PATH set by setup" do
     setup do
+      path = File.expand_path('../../assets', __FILE__)
+      assert_equal path, Smooth::Helpers::Assets.base_path
+
       Smooth::Helpers::Assets.base_path File.expand_path("../fixtures/assets", __FILE__)
     end
 
