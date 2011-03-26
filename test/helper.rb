@@ -25,4 +25,17 @@ class Test::Unit::TestCase
     FileUtils.rm_rf files
   end
 
+  def renderer(template, layout, helpers)
+    helpers = Array(helpers)
+
+    r = Smooth::Renderer.new(template)
+    r.layout = layout if layout
+
+    helpers.each do |helper|
+      r.register_helpers helper
+    end
+
+    r
+  end
+
 end
