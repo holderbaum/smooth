@@ -15,18 +15,21 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
   context "no setup" do
     test "it should set the correct path" do
       path = File.expand_path('../../assets', __FILE__)
-      assert_equal path, Smooth::Helpers::Assets::BASE_PATH
+      assert_equal path, Smooth::Helpers::Assets.base_path
     end
   end
 
   context "PATH set by setup" do
     setup do
-      @old_base_path = Smooth::Helpers::Assets::BASE_PATH
-      Smooth::Helpers::Assets::BASE_PATH = File.expand_path("../fixtures/assets", __FILE__)
+      Smooth::Helpers::Assets.base_path File.expand_path("../fixtures/assets", __FILE__)
     end
 
     teardown do
-      Smooth::Helpers::Assets::BASE_PATH = @old_base_path
+      Smooth::Helpers::Assets.reset_base_path!
+
+      path = File.expand_path('../../assets', __FILE__)
+      assert_equal path, Smooth::Helpers::Assets.base_path
+
       clear_test_dir
     end
 
