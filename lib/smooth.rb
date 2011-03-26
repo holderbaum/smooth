@@ -3,3 +3,4 @@ require 'haml'
 
 require 'smooth/helpers'
 require 'smooth/base'
+require 'smooth/renderer'

@@ -1,8 +1,12 @@
 module Smooth
   class Renderer
 
-    def initialize(*args)
-      
+    def initialize(template)
+      @template = template
+    end
+
+    def render
+      Haml::Engine.new(@template).render
     end
 
   end
