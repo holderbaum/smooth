@@ -15,7 +15,7 @@ module Smooth
 
       def convert_path_array_to_path(prefix, array, file_type = prefix)
         path = array.map(&:to_s)
-        path.last << ".#{file_type}"
+        path.last << ".#{file_type}" unless path.last.match("\.#{file_type}$")
         File.join path.unshift(prefix)
       end
 
