@@ -2,15 +2,13 @@ require 'test/helper'
 require 'lib/smooth'
 
 class SmoothHelpersSlidesTest < Test::Unit::TestCase
-  include Smooth::Helpers
 
-  def content_store(haml)
-    ContentStore.register_helpers Smooth::Helpers::Components
-    ContentStore.register_helpers Smooth::Helpers::Slides
-    cs = ContentStore.new(haml)
-    cs.render!
-    cs
+  def renderer_context(haml)
+    r = renderer(haml, nil, [Smooth::Helpers::ContentStore, Smooth::Helpers::Components, Smooth::Helpers::Slides])
+    r.result
+    r.context
   end
+
 
   test "it should provide a slides helper" do
     haml = <<-EOC.unindent
@@ -25,8 +23,8 @@ class SmoothHelpersSlidesTest < Test::Unit::TestCase
 
     EOC
 
-    cs = content_store(haml)
-    assert_equal result, cs.context.content(:slides)
+    r = renderer_context(haml)
+    assert_equal result, r.content(:slides)
   end
 
   test "the slides helper should also be used in the layout" do
@@ -42,7 +40,7 @@ class SmoothHelpersSlidesTest < Test::Unit::TestCase
 
     EOC
 
-    cs = content_store(haml)
-    assert_equal result, cs.context.slides
+    r = renderer_context(haml)
+    assert_equal result, r.slides
   end
 end
