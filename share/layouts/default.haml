@@ -10,7 +10,8 @@
       = styles
 
     -# required stylesheet images
-    - copy_asset 'img/default-bg.jpg'
+    - assets = ['img/default-bg.jpg'] # add more if necessary
+    - assets.each { |asset| copy_asset asset }
   %body
     :javascript
       $(function() {
