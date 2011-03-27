@@ -1,7 +1,14 @@
 - layout :default
 
 - about do
-  - title "something"
+  - title  "something"
   - author "J. Holderbaum"
 
-= about(:title)
+- slides do
+
+  = slide "This is slide #1" do
+    %p content of this slide
+
+  = slide "This is slide #1" do
+    %p content of this second amazing slide
+
