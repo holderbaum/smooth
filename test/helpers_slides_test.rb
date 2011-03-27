@@ -17,9 +17,7 @@ class SmoothHelpersSlidesTest < Test::Unit::TestCase
     EOC
 
     result = <<-EOC.unindent
-      <div class='slides'>
-        <div class='something'></div>
-      </div>
+      <div class='something'></div>
 
     EOC
 
@@ -34,9 +32,7 @@ class SmoothHelpersSlidesTest < Test::Unit::TestCase
     EOC
 
     result = <<-EOC.unindent
-      <div class='slides'>
-        <div class='something'></div>
-      </div>
+      <div class='something'></div>
 
     EOC
 
