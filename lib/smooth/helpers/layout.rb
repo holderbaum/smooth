@@ -17,7 +17,7 @@ module Smooth
       end
 
       def set_layout_haml_content(layout)
-        @renderer.layout = layout
+        @renderer.layout = layout unless @renderer.layout
       end
 
     end

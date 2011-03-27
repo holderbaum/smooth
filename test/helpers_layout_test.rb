@@ -7,8 +7,8 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
   CONFIG.layouts_pathes.prepend File.expand_path("../fixtures/layouts/path1", __FILE__)
   CONFIG.layouts_pathes.prepend File.expand_path("../fixtures/layouts/path2", __FILE__)
 
-  def renderer(haml)
-    r = super(haml, nil, CONFIG, Smooth::Helpers::Layout)
+  def renderer(haml, layout = nil)
+    r = super(haml, layout, CONFIG, Smooth::Helpers::Layout)
     r.result
   end
 
@@ -101,5 +101,18 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
     end
 
     assert_equal "Layout 'this_layout_wont_be_found.haml' not found.", e.message
+  end
+
+  test "it should not override the renderer layout" do
+    template = <<-EOC.unindent
+      -layout :test1
+      -@inner = "foo"
+    EOC
+
+    result = <<-EOC.unindent
+      <div class='layout'>foo</div>
+    EOC
+
+    assert_equal result, renderer(template, ".layout= @inner")
   end
 end
