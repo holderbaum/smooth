@@ -38,6 +38,17 @@ class SmoothConfigTest < Test::Unit::TestCase
       assert_equal [Pathname.new("/a_path")]+pathes, p.to_a
     end
 
+    test "it should be resettable" do
+      p = Smooth::Config::Pathes.new( "/", "/swap" )
+
+      pathes = [Pathname.new("/"), Pathname.new("/swap")]
+
+      p.unshift "/a_path"
+
+      p.reset!
+      assert_equal pathes, p.to_a
+    end
+
   end
 
   context "initialize" do

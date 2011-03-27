@@ -20,10 +20,15 @@ module Smooth
         args.each do |path|
           @pathes << Pathname.new(path)
         end
+        @default = to_a
       end
 
       def unshift(path)
         @pathes.unshift Pathname.new(path)
+      end
+
+      def reset!
+        @pathes = @default
       end
 
       def to_a
