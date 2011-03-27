@@ -4,7 +4,7 @@ require 'lib/smooth'
 class SmoothHelpersSlidesTest < Test::Unit::TestCase
 
   def renderer_context(haml)
-    r = renderer(haml, nil, [Smooth::Helpers::ContentStore, Smooth::Helpers::Components, Smooth::Helpers::Slides])
+    r = renderer(haml, nil, Smooth::Config.new, [Smooth::Helpers::ContentStore, Smooth::Helpers::Components, Smooth::Helpers::Slides])
     r.result
     r.context
   end
