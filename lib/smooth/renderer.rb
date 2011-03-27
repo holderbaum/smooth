@@ -1,12 +1,12 @@
 module Smooth
   class Renderer
 
-    attr_writer :layout
+    attr_accessor :layout
     attr_reader :context
 
     def initialize(template, config = Config.new)
       @template = template
-
+      @layout = nil
       @context = Context.new(self, config)
     end
 
