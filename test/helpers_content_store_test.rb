@@ -2,10 +2,9 @@ require 'test/helper'
 require 'lib/smooth'
 
 class SmoothHelpersContentStoreTest < Test::Unit::TestCase
-  include Smooth::Helpers
 
   def renderer_context(haml)
-    r = renderer(haml, nil, Smooth::Helpers::ContentStore)
+    r = renderer(haml, nil, Smooth::Config.new, Smooth::Helpers::ContentStore)
     r.result
     r.context
   end
