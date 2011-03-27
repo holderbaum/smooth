@@ -1,13 +1,18 @@
 - layout :default
 
 - about do
-  - title  "Smooth!!einself!1!"
-  - author "J. Holderbaum"
+  - title    "Smooth!!einself!1!"
+  - subtitle "My first slide with smooth"
+  - author   "J. Holderbaum"
 
 - slides do
 
+  = title
+
   = slide "This is slide #1" do
     %p content of this slide
+
+  = section "Section II", :desc => "With a little description"
 
   = slide "This is slide #1" do
     %p content of this second amazing slide
