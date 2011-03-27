@@ -90,4 +90,16 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
     assert_equal results[0], renderer(templates[0])
     assert_equal results[1], renderer(templates[1])
   end
+
+  test "it should raise if no layout is found" do
+    template = <<-EOC.unindent
+      -layout "this_layout_wont_be_found"
+    EOC
+    
+    e = assert_raise RuntimeError do
+      renderer(template)
+    end
+
+    assert_equal "Layout 'this_layout_wont_be_found.haml' not found.", e.message
+  end
 end
