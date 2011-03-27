@@ -9,7 +9,6 @@ class SmoothHelpersStyleTest < Test::Unit::TestCase
     r.context
   end
 
-
   test "it should provide a collecting style helper" do
     haml = <<-EOC.unindent
       -style :style1 do
@@ -24,6 +23,22 @@ class SmoothHelpersStyleTest < Test::Unit::TestCase
 
       // style2
       my css2
+    EOC
+
+    assert_equal result, renderer_context(haml).styles
+  end
+
+  test "it should not concatenate nor overwrite keys" do
+    haml = <<-EOC.unindent
+      -style :style1 do
+        my css
+      -style :style1 do
+        my css2
+    EOC
+
+    result = <<-EOC.unindent
+      // style1
+      my css
     EOC
 
     assert_equal result, renderer_context(haml).styles

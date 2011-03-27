@@ -13,7 +13,7 @@ module Smooth
       def style(key, &block)
         @styles ||= {}
 
-        @styles[key] = capture_haml(&block)
+        @styles[key] = capture_haml(&block) unless @styles[key]
       end
 
       def styles
