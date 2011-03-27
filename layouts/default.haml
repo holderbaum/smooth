@@ -7,7 +7,7 @@
     %script{ :src => js_path("jquery.centreinwindow") }
     %link{ :href => css_path("default"), :rel => "stylesheet", :type => "text/css" }/
     -# required stylesheet images
-    - img_path 'default-bg.jpg'
+    - copy_asset 'img/default-bg.jpg'
   %body
     :javascript
       $(function() {
