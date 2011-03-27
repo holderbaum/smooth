@@ -2,18 +2,18 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'smooth'
 
-layout  = File.expand_path('layout.haml')
-content = File.expand_path('content.haml')
+template = Pathname.new File.expand_path('template.haml')
 
-unless File.exist? layout
-  puts "please create layout.haml"
-  exit 1
-end
-
-unless File.exist? content
+unless template.exist?
   puts "please create content.haml"
   exit 1
 end
 
-base = Smooth::Base.new(File.read(layout))
-puts base.render(File.read(content))
+renderer = Smooth::Renderer.new(template.read)
+
+Smooth::Helpers.constants.each do |const|
+  renderer.register_helpers Smooth::Helpers.const_get(const)  
+end
+
+puts renderer.result
+
