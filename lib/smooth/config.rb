@@ -11,6 +11,25 @@ module Smooth
       @components_pathes = Pathes.new( COMPONENTS_PATH )
     end
 
+    class Path
+      extend Forwardable
+
+      def_delegators :@path, :join, :to_s
+
+      def initialize(path)
+        @path = Pathname.new(path)
+        @default = @path.dup
+      end
+
+      def set(path)
+        @path = Pathname.new(path)
+      end
+
+      def reset!
+        @path = @default
+      end
+
+    end
 
     class Pathes
       include Enumerable
