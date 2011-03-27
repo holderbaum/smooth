@@ -2,6 +2,7 @@
 source "http://rubygems.org"
 
 gem 'haml'
+gem 'ultraviolet', :require => 'uv'
 
 group :development do
   gem 'jeweler'

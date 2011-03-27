@@ -12,7 +12,14 @@ GEM
       rake
     libnotify (0.3.0)
       ffi (>= 0.6.2)
+    oniguruma (1.1.0)
+    plist (3.1.0)
     rake (0.8.7)
+    textpow (0.10.1)
+      oniguruma (>= 1.1.0)
+      plist (>= 3.0.0)
+    ultraviolet (0.10.2)
+      textpow (>= 0.10.0)
     watchr (0.7)
 
 PLATFORMS
@@ -23,4 +30,5 @@ DEPENDENCIES
   haml
   jeweler
   libnotify
+  ultraviolet
   watchr
