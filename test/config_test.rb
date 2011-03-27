@@ -12,7 +12,7 @@ class SmoothConfigTest < Test::Unit::TestCase
         pathes << path
       end
 
-      assert_equal ["/", "/bin"], pathes
+      assert_equal [Pathname.new("/"), Pathname.new("/bin")], pathes
     end
 
     test "it should include Enumerable" do
@@ -20,20 +20,22 @@ class SmoothConfigTest < Test::Unit::TestCase
     end
 
     test "it should implement to_a with a clone" do
-      pathes = ["/", "/usr"]
-      p = Smooth::Config::Pathes.new( *pathes )
-      
+      p = Smooth::Config::Pathes.new( "/", "/usr" )
+
+      pathes = [Pathname.new("/"), Pathname.new("/usr")]
+
       assert_equal pathes, p.to_a
       p.to_a << "/SOMETHING"
       assert_equal pathes, p.to_a
     end
 
     test "it should implement unshift" do
-      pathes = ["/", "/usr"]
-      p = Smooth::Config::Pathes.new( *pathes )
+      p = Smooth::Config::Pathes.new( "/", "/tmp" )
+
+      pathes = [Pathname.new("/"), Pathname.new("/tmp")]
+
       p.unshift "/a_path"
-      
-      assert_equal ["/a_path"]+pathes, p.to_a
+      assert_equal [Pathname.new("/a_path")]+pathes, p.to_a
     end
 
   end
