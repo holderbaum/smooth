@@ -3,8 +3,11 @@ require 'lib/smooth'
 
 class SmoothHelpersLayoutTest < Test::Unit::TestCase
 
+  CONFIG = Smooth::Config.new
+  CONFIG.layouts_pathes.prepend File.expand_path("../fixtures/layouts", __FILE__)
+
   def renderer(haml)
-    r = super(haml, nil, Smooth::Helpers::Layout)
+    r = super(haml, nil, CONFIG, Smooth::Helpers::Layout)
     r.result
   end
 
