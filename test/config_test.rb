@@ -87,9 +87,9 @@ class SmoothConfigTest < Test::Unit::TestCase
     test "default pathes" do
       cfg = Smooth::Config.new
 
-      assets_path = Smooth::Config::Path.new(File.expand_path('../../assets', __FILE__))
-      layouts_pathes = Smooth::Config::Pathes.new(File.expand_path('../../layouts', __FILE__))
-      components_pathes = Smooth::Config::Pathes.new(File.expand_path('../../comp', __FILE__))
+      assets_path = Smooth::Config::Path.new(File.expand_path('../../share/assets', __FILE__))
+      layouts_pathes = Smooth::Config::Pathes.new(File.expand_path('../../share/layouts', __FILE__))
+      components_pathes = Smooth::Config::Pathes.new(File.expand_path('../../share/components', __FILE__))
 
       assert cfg.assets_path.is_a?(Smooth::Config::Path)
       assert_equal assets_path.to_s, cfg.assets_path.to_s

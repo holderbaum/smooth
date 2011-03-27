@@ -1,9 +1,9 @@
 module Smooth
   class Config
 
-    ASSETS_PATH     = File.expand_path('../../../assets', __FILE__)
-    LAYOUTS_PATH    = File.expand_path('../../../layouts', __FILE__)
-    COMPONENTS_PATH = File.expand_path('../../../comp', __FILE__)
+    ASSETS_PATH     = File.expand_path('../../../share/assets', __FILE__)
+    LAYOUTS_PATH    = File.expand_path('../../../share/layouts', __FILE__)
+    COMPONENTS_PATH = File.expand_path('../../../share/components', __FILE__)
 
     attr_reader :assets_path, :layouts_pathes, :components_pathes
 
