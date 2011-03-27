@@ -1,17 +1,23 @@
+- assets = ['img/default-bg.jpg'] # add more if necessary
+- assets.each { |asset| copy_asset asset }
+
 !!!XML
 !!!STRICT
 %html
   %head
     %title= about :title
+
+    %script{ :src => js_path("jquery-1.5.1.min") }
     %script{ :src => js_path("jquery.tools.min") }
     %script{ :src => js_path("jquery.centreinwindow") }
+
     %link{ :href => css_path("default"), :rel => "stylesheet", :type => "text/css" }/
+
+    = content :head
+
     %style{ :type => 'text/css' }
       = styles
 
-    -# required stylesheet images
-    - assets = ['img/default-bg.jpg'] # add more if necessary
-    - assets.each { |asset| copy_asset asset }
   %body
     :javascript
       $(function() {
