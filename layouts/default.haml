@@ -3,5 +3,17 @@
 %html
   %head
     %title= about :title
+    %script{ :src => js_path("jquery.tools.min") }
+    %script{ :src => js_path("jquery.centreinwindow") }
+    %link{ :href => css_path("default"), :rel => "stylesheet", :type => "text/css" }/
+    -# required stylesheet images
+    - img_path 'default-bg.jpg'
   %body
-    = slides
+    :javascript
+      $(function() {
+      	$(".slides").scrollable({ circular: false }).centreInWindow();
+      });
+    .slides
+      / wrapper for scrollable items
+      .items
+        = slides
