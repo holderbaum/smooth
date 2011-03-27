@@ -5,4 +5,5 @@ require 'smooth/helpers/components'
 require 'smooth/helpers/assets'
 require 'smooth/helpers/layout'
 require 'smooth/helpers/style'
+require 'smooth/helpers/code'
 
