@@ -79,4 +79,20 @@ class SmoothRendererTest < Test::Unit::TestCase
     end
   end
 
+  context "config" do
+    test "it should create an implicit config object" do
+      r = Smooth::Renderer.new("%template")
+
+      assert r.context.config.is_a?(Smooth::Config)
+    end
+
+    test "it should accept an explicit config object" do
+      c = Smooth::Config.new
+      r = Smooth::Renderer.new("%template", c)
+
+      assert_equal c, r.context.config
+    end
+
+  end
+
 end

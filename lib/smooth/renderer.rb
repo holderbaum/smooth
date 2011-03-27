@@ -4,10 +4,10 @@ module Smooth
     attr_writer :layout
     attr_reader :context
 
-    def initialize(template)
+    def initialize(template, config = Config.new)
       @template = template
 
-      @context = Context.new(self)
+      @context = Context.new(self, config)
     end
 
     def render!
@@ -26,8 +26,11 @@ module Smooth
 
     class Context
 
-      def initialize(renderer)
+      attr_reader :config
+
+      def initialize(renderer, config)
         @renderer = renderer
+        @config = config
       end
 
       def singleton_class
