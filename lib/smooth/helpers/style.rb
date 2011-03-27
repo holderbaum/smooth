@@ -10,6 +10,18 @@ module Smooth
         #end
       #end
 
+      def style(key, &block)
+        @styles ||= {}
+
+        @styles[key] = capture_haml(&block)
+      end
+
+      def styles
+        @styles.map do |key, style|
+          "// #{key}\n#{style}"
+        end.join("\n")
+      end
+
     end
   end
 end
