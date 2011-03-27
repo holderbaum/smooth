@@ -60,12 +60,12 @@ class SmoothConfigTest < Test::Unit::TestCase
       assert_equal pathes, p.to_a
     end
 
-    test "it should implement unshift" do
+    test "it should implement prepend" do
       p = Smooth::Config::Pathes.new( "/", "/tmp" )
 
       pathes = [Pathname.new("/"), Pathname.new("/tmp")]
 
-      p.unshift "/a_path"
+      p.prepend "/a_path"
       assert_equal [Pathname.new("/a_path")]+pathes, p.to_a
     end
 
@@ -74,7 +74,7 @@ class SmoothConfigTest < Test::Unit::TestCase
 
       pathes = [Pathname.new("/"), Pathname.new("/swap")]
 
-      p.unshift "/a_path"
+      p.prepend "/a_path"
       p.reset!
 
       assert_equal pathes, p.to_a

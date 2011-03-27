@@ -42,7 +42,7 @@ module Smooth
         @default = to_a
       end
 
-      def unshift(path)
+      def prepend(path)
         @pathes.unshift Pathname.new(path)
       end
 
