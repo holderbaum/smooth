@@ -7,7 +7,7 @@ module Smooth
     attr_reader :assets_path, :components_pathes
 
     def initialize
-      @assets_path = Pathname.new( ASSETS_PATH ) 
+      @assets_path = Path.new( ASSETS_PATH ) 
       @components_pathes = Pathes.new( COMPONENTS_PATH )
     end
 
