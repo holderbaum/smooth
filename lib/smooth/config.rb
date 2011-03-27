@@ -18,12 +18,12 @@ module Smooth
       def initialize(*args)
         @pathes = []
         args.each do |path|
-          @pathes << path
+          @pathes << Pathname.new(path)
         end
       end
 
       def unshift(path)
-        @pathes.unshift path 
+        @pathes.unshift Pathname.new(path)
       end
 
       def to_a
