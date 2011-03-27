@@ -13,11 +13,17 @@ module Smooth
 
 
     class Pathes
+      include Enumerable
+
       def initialize(*args)
         @pathes = []
         args.each do |path|
           @pathes << path
         end
+      end
+
+      def unshift(path)
+        @pathes.unshift path 
       end
 
       def to_a
