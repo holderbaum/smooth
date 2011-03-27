@@ -18,10 +18,10 @@ class SmoothHelpersStyleTest < Test::Unit::TestCase
     EOC
 
     result = <<-EOC.unindent
-      // style1
+      /* style1 */
       my css
 
-      // style2
+      /* style2 */
       my css2
     EOC
 
@@ -37,7 +37,7 @@ class SmoothHelpersStyleTest < Test::Unit::TestCase
     EOC
 
     result = <<-EOC.unindent
-      // style1
+      /* style1 */
       my css
     EOC
 

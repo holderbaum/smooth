@@ -18,7 +18,8 @@ module Smooth
 
       def styles
         @styles.map do |key, style|
-          "// #{key}\n#{style}"
+          "/* #{key} */\n"+
+          "#{style}"
         end.join("\n")
       end
 
