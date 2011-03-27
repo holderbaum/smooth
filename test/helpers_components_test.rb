@@ -35,7 +35,7 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
         =component :no_component
     EOC
 
-    e = assert_raise(RuntimeError, "aa") do
+    e = assert_raise(Smooth::Helpers::Components::ComponentError) do
       renderer_result(haml)
     end
 
@@ -194,8 +194,34 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
           </div>
       EOC
 
-      r = renderer_result(haml)
-      assert_equal result, r
+      assert_equal result, renderer_result(haml)
+    end
+
+    test "it should invoke method_missing and dispatch to component_resolver" do
+      haml = <<-EOC.unindent
+        =with_block_and_arg_and_title "title", :arg => "foo" do
+          bar
+      EOC
+
+      result = <<-EOC.unindent
+        <div class='with_block_and_arg_and_title'>
+          title
+          foo
+          bar
+        </div>
+      EOC
+
+      assert_equal result, renderer_result(haml)
+    end
+
+    test "it should use regular method_missing if component not found" do
+      haml = <<-EOC.unindent
+        =some_weird_component_name_thats_not_found
+      EOC
+
+      assert_raise NameError do
+        renderer_result(haml)
+      end
     end
 
   end
