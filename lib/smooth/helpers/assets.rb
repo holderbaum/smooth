@@ -1,24 +1,11 @@
 module Smooth
   module Helpers
     module Assets
-      BASE_PATH = File.expand_path('../../../../assets', __FILE__)
-      
-      def self.base_path(new_path = nil)
-        if new_path
-          @base_path = new_path
-        else
-          @base_path ||= BASE_PATH
-        end
-      end
-
-      def self.reset_base_path!
-        @base_path = nil
-      end
 
       def copy_asset(path)
         FileUtils.mkdir_p File.join(Dir.pwd, File.dirname(path) )
 
-        from = File.join(Assets.base_path, path)
+        from = @config.assets_path.join(path)
         to =  File.join(Dir.pwd, path)
 
         FileUtils.cp from, to unless File.exist? to
