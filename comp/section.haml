@@ -1,0 +1,11 @@
+- content :style do
+  :sass
+    div.slide.section
+      text-align: center
+      h1
+        margin-top: 150px
+
+.slide.section
+  %h1= title
+  %h2= desc if defined? desc
+

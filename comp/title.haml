@@ -1,0 +1,14 @@
+- content :style do
+  :sass
+    div.slide.title
+      text-align: center
+      h1
+        margin-top: 150px
+
+
+.slide.title
+  %h1= about :title
+  %h2= about :subtitle
+  %p.about
+    = "By #{about :author}" if about :author
+
