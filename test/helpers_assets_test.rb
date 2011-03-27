@@ -62,6 +62,19 @@ class SmoothHelpersAssetsTest < Test::Unit::TestCase
       end
     end
 
+    test "it should also copy an entire dir recursively" do
+      clear_test_dir
+      in_test_dir do
+        haml = <<-EOC.unindent
+            -copy_asset 'dir'
+        EOC
+
+        r = renderer_result(haml)
+        assert File.exist?('dir/file1'), 'dir/file1'
+        assert File.exist?('dir/subdir/fileX'), 'dir/subdir/fileX'
+      end
+    end
+
     test "it should not fail if the asset dirs exist" do
       clear_test_dir
       in_test_dir do

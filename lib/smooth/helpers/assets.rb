@@ -8,7 +8,7 @@ module Smooth
         from = @config.assets_path.join(path)
         to =  File.join(Dir.pwd, path)
 
-        FileUtils.cp from, to unless File.exist? to
+        FileUtils.cp_r from, to unless File.exist? to
       end
 
       def convert_path_array_to_path(prefix, array, file_type = prefix)
