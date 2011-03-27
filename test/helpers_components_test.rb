@@ -3,17 +3,16 @@ require 'lib/smooth'
 
 class SmoothHelpersComponentsTest < Test::Unit::TestCase
 
-  def config
-    unless @config
-      @config = Smooth::Config.new
-      @config.components_pathes.prepend File.expand_path("../fixtures/components/path1", __FILE__)
-      @config.components_pathes.prepend File.expand_path("../fixtures/components/path2", __FILE__)
-    end
-    @config
-  end
+  CONFIG = Smooth::Config.new
+  CONFIG.components_pathes.prepend File.expand_path("../fixtures/components/path1", __FILE__)
+  CONFIG.components_pathes.prepend File.expand_path("../fixtures/components/path2", __FILE__)
 
   def renderer_result(haml)
-    renderer(haml, nil, config, Smooth::Helpers::Components).result
+    renderer(haml, nil, CONFIG, Smooth::Helpers::Components).result
+  end
+
+  teardown do
+    clear_test_dir
   end
 
   test "it should render components from both pathes" do
