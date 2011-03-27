@@ -5,10 +5,12 @@ module Smooth
       def content(title, string=nil, &block)
         @content ||= {}
 
+        @content[title] ||= ""
+
         if string
-          @content[title] = "#{string}\n"
+          @content[title] << "#{string}\n"
         elsif block_given?
-          @content[title] = capture_haml(&block) if block_given?
+          @content[title] << capture_haml(&block) if block_given?
         else
           @content[title]
         end
