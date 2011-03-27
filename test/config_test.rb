@@ -3,6 +3,37 @@ require 'lib/smooth'
 
 class SmoothConfigTest < Test::Unit::TestCase
 
+  context "Path" do
+    test "api delegation" do
+      p = Smooth::Config::Path.new("/usr")
+
+      assert_equal Pathname.new("/usr/bin"), p.join("bin")
+    end
+
+    test "it should implement to_s" do
+      p = Smooth::Config::Path.new("/usr")
+
+      assert_equal "/usr", p.to_s
+    end
+
+    test "it should be changeable" do
+      p = Smooth::Config::Path.new("/usr")
+
+      p.set("/bin")
+
+      assert_equal "/bin", p.to_s
+    end
+
+    test "it should be resettable" do
+      p = Smooth::Config::Path.new("/usr")
+
+      p.set("/bin")
+      p.reset!
+
+      assert_equal "/usr", p.to_s
+    end
+  end
+
   context "Pathes" do
 
     test "it should implement each" do
@@ -44,8 +75,8 @@ class SmoothConfigTest < Test::Unit::TestCase
       pathes = [Pathname.new("/"), Pathname.new("/swap")]
 
       p.unshift "/a_path"
-
       p.reset!
+
       assert_equal pathes, p.to_a
     end
 
