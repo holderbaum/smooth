@@ -17,21 +17,21 @@ module Smooth
         File.join path.unshift(prefix)
       end
 
-      def js_include(*args)
+      def js_path(*args)
         path = convert_path_array_to_path 'js', args
         copy_asset path
 
-        haml_tag 'script', :src => path
+        path
       end
 
-      def css_include(*args)
+      def css_path(*args)
         path = convert_path_array_to_path 'style', args, 'css'
         copy_asset path
 
-        haml_tag 'link', :rel => 'stylesheet', :type => 'text/css', :href => path
+        path
       end
 
-      def img_include(*args)
+      def img_path(*args)
         if match = args.last.match(/\.(\w*)$/)
           file_type = match[0]
         else
@@ -41,7 +41,7 @@ module Smooth
         path = convert_path_array_to_path 'img', args, file_type
         copy_asset path
 
-        haml_tag 'img', :src => path
+        path
       end
 
     end

@@ -104,13 +104,13 @@ class SmoothHelpersAssetsTest < Test::Unit::TestCase
       clear_test_dir
       in_test_dir do
         haml = <<-EOC.unindent
-            -js_include :example
-            -js_include :subdir, :example
+            =js_path :example
+            =js_path :subdir, :example
         EOC
 
         test = <<-EOC.unindent
-            <script src='js/example.js'></script>
-            <script src='js/subdir/example.js'></script>
+            js/example.js
+            js/subdir/example.js
         EOC
 
         r = renderer_result(haml)
@@ -125,13 +125,13 @@ class SmoothHelpersAssetsTest < Test::Unit::TestCase
       clear_test_dir
       in_test_dir do
         haml = <<-EOC.unindent
-            -css_include :example
-            -css_include :subdir, :example
+            =css_path :example
+            =css_path :subdir, :example
         EOC
 
         test = <<-EOC.unindent
-            <link href='style/example.css' rel='stylesheet' type='text/css' />
-            <link href='style/subdir/example.css' rel='stylesheet' type='text/css' />
+            style/example.css
+            style/subdir/example.css
         EOC
 
         r = renderer_result(haml)
@@ -146,15 +146,15 @@ class SmoothHelpersAssetsTest < Test::Unit::TestCase
       clear_test_dir
       in_test_dir do
         haml = <<-EOC.unindent
-            -img_include 'example.jpg'
-            -img_include 'example'
-            -img_include :subdir, 'example.png'
+            =img_path 'example.jpg'
+            =img_path 'example'
+            =img_path :subdir, 'example.png'
         EOC
 
         test = <<-EOC.unindent
-            <img src='img/example.jpg' />
-            <img src='img/example.jpg' />
-            <img src='img/subdir/example.png' />
+            img/example.jpg
+            img/example.jpg
+            img/subdir/example.png
         EOC
 
         assert_equal test, renderer_result(haml)
