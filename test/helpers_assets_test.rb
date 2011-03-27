@@ -141,4 +141,25 @@ class SmoothHelpersAssetsTest < Test::Unit::TestCase
 
   end
 
+  context "img_include" do
+    test "it should create the img tag" do
+      clear_test_dir
+      in_test_dir do
+        haml = <<-EOC.unindent
+            -img_include 'example.jpg'
+            -img_include 'example'
+            -img_include :subdir, 'example.png'
+        EOC
+
+        test = <<-EOC.unindent
+            <img src='img/example.jpg' />
+            <img src='img/example.jpg' />
+            <img src='img/subdir/example.png' />
+        EOC
+
+        assert_equal test, renderer_result(haml)
+      end
+    end
+  end
+
 end

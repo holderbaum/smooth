@@ -31,6 +31,19 @@ module Smooth
         haml_tag 'link', :rel => 'stylesheet', :type => 'text/css', :href => path
       end
 
+      def img_include(*args)
+        if match = args.last.match(/\.(\w*)$/)
+          file_type = match[0]
+        else
+          file_type = 'jpg'
+        end
+
+        path = convert_path_array_to_path 'img', args, file_type
+        copy_asset path
+
+        haml_tag 'img', :src => path
+      end
+
     end
   end
 end
