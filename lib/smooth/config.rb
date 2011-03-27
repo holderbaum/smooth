@@ -1,14 +1,16 @@
 module Smooth
   class Config
 
-    ASSETS_PATH = File.expand_path('../../../assets', __FILE__)
-    COMPONENTS_PATH = File.expand_path("../../../comp", __FILE__)
+    ASSETS_PATH     = File.expand_path('../../../assets', __FILE__)
+    LAYOUTS_PATH    = File.expand_path('../../../layouts', __FILE__)
+    COMPONENTS_PATH = File.expand_path('../../../comp', __FILE__)
 
-    attr_reader :assets_path, :components_pathes
+    attr_reader :assets_path, :layouts_pathes, :components_pathes
 
     def initialize
-      @assets_path = Path.new( ASSETS_PATH ) 
-      @components_pathes = Pathes.new( COMPONENTS_PATH )
+      @assets_path        = Path.new( ASSETS_PATH ) 
+      @layouts_pathes     = Pathes.new( LAYOUTS_PATH )
+      @components_pathes  = Pathes.new( COMPONENTS_PATH )
     end
 
     class Path
