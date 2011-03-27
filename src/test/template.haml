@@ -17,3 +17,9 @@
   = slide "This is slide #1" do
     %p content of this second amazing slide
 
+  = slide "Some Code-Highlighting" do
+    %p this is javascript highlighting, out of the box
+    = code :javascript, :blackboard  do
+      :plain
+        alert("string");
+
