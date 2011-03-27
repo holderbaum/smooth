@@ -11,7 +11,7 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
     r.result
   end
 
-  test "it should set meta attributes" do
+  test "it shoul be possible to set raw haml content as layout" do
     template = <<-EOC.unindent
       -set_layout_haml_content ".layout= @inner"
       -@inner = "foo"
