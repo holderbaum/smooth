@@ -3,6 +3,41 @@ require 'lib/smooth'
 
 class SmoothConfigTest < Test::Unit::TestCase
 
+  context "Pathes" do
+
+    test "it should implement each" do
+      p = Smooth::Config::Pathes.new( "/", "/bin" )
+      pathes = []
+      p.each do |path|
+        pathes << path
+      end
+
+      assert_equal ["/", "/bin"], pathes
+    end
+
+    test "it should include Enumerable" do
+      assert Smooth::Config::Pathes.included_modules.include?(Enumerable)
+    end
+
+    test "it should implement to_a with a clone" do
+      pathes = ["/", "/usr"]
+      p = Smooth::Config::Pathes.new( *pathes )
+      
+      assert_equal pathes, p.to_a
+      p.to_a << "/SOMETHING"
+      assert_equal pathes, p.to_a
+    end
+
+    test "it should implement unshift" do
+      pathes = ["/", "/usr"]
+      p = Smooth::Config::Pathes.new( *pathes )
+      p.unshift "/a_path"
+      
+      assert_equal ["/a_path"]+pathes, p.to_a
+    end
+
+  end
+
   context "initialize" do
 
     test "default pathes" do
