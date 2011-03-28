@@ -10,7 +10,7 @@ module Smooth
         if string
           @content[title] << "#{string}\n"
         elsif block_given?
-          @content[title] << capture_haml(&block) if block_given?
+          @content[title] << capture_haml(&block)
         else
           @content[title]
         end
