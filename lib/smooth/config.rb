@@ -37,10 +37,7 @@ module Smooth
       include Enumerable
 
       def initialize(*args)
-        @pathes = []
-        args.each do |path|
-          @pathes << Pathname.new(path)
-        end
+        @pathes = args.map { |path| Pathname.new(path) }
         @default = to_a
       end
 
