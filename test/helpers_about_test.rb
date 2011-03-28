@@ -40,4 +40,15 @@ class SmoothHelpersAboutTest < Test::Unit::TestCase
 
     assert_equal "the title", renderer_context(haml).about(:title)
   end
+
+  test "about attributes raise method_missing when called w/o arguments" do
+    haml = <<-EOC.unindent
+      -about do
+        -title
+    EOC
+
+    assert_raise NameError do
+      renderer_context(haml).about(:title)
+    end
+  end
 end

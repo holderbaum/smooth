@@ -18,6 +18,8 @@ module Smooth
         def method_missing(meth, *args, &block)
           if args.size > 0
             add_about_info meth, args.first
+          else
+            super
           end
         end
       end
