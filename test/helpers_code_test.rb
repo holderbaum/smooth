@@ -1,7 +1,7 @@
 require 'test/helper'
 require 'lib/smooth'
 
-class SmoothHelpersStyleTest < Test::Unit::TestCase
+class SmoothHelpersCodeTest < Test::Unit::TestCase
 
   def renderer_result(haml)
     r = renderer(haml, nil, Smooth::Config.new, [Smooth::Helpers::Assets, Smooth::Helpers::ContentStore, Smooth::Helpers::Code])
