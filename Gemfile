@@ -6,6 +6,9 @@ gem 'ultraviolet', :require => 'uv'
 
 group :development do
   gem 'jeweler'
+  gem 'yard'
+  gem 'RedCloth'
+  gem 'BlueCloth'
 end
 
 group :test do
