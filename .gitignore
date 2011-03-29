@@ -4,3 +4,5 @@
 src/test/*
 !src/test/template.haml
 test/fixtures/test_dir/*
+.yardoc
+doc
