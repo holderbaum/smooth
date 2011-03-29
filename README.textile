@@ -1,13 +1,12 @@
-Smooth
-======
+.h1 Smooth
 
-What is it?
------------
+.h2 What is it?
+
 Smooth is a library, wrapped around the amazing haml-sass parser, to generate sexy html-slides from a haml file.
 
 Basically, it provides a bunch of useful and slide-related helpers and enhancements to haml.
 
-### Components mechanism
+.h3 Components mechanism
 
 Smooth implements a component-helper, that generates dynamic methods in your template.
 
@@ -39,15 +38,15 @@ So, the header-component could look like this:
 </code>
 </pre>
 
-**Note:** Components are nestable.
+*Note:* Components are nestable.
 
-### Assets mechanism
-### Helpers
+.h3 Assets mechanism
+
+.h3 Helpers
 
 
-How to use it?
---------------
+.h2 How to use it?
 
-Installation
-------------
+.h2 Installation
+
 Deps: `apt-get install libonig-dev`
