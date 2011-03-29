@@ -1,6 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    BlueCloth (1.0.1)
+    RedCloth (4.2.7)
     contest (0.1.2)
     ffi (1.0.7)
       rake (>= 0.8.7)
@@ -21,14 +23,18 @@ GEM
     ultraviolet (0.10.2)
       textpow (>= 0.10.0)
     watchr (0.7)
+    yard (0.6.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  BlueCloth
+  RedCloth
   contest
   haml
   jeweler
   libnotify
   ultraviolet
   watchr
+  yard
