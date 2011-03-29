@@ -1,6 +1,6 @@
 --no-private
 --title "Smooth.."
 --markup textile
-
-lib/**/*.rb -
-README.md
+--readme README.textile
+--no-highlight
+lib/**/*.rb
