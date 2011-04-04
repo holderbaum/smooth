@@ -18,21 +18,21 @@ class SmoothHelpersStyleTest < Test::Unit::TestCase
     EOC
 
     result = <<-EOC.unindent
-      /* style2 */
-      my css2
-
       /* style1 */
       my css
+
+      /* style2 */
+      my css2
     EOC
 
     assert_equal result, renderer_context(haml).styles
   end
 
-  test "it should not concatenate nor overwrite keys" do
+  test "it should not concatenate nor overwrite keys even with key string" do
     haml = <<-EOC.unindent
       -style :style1 do
         my css
-      -style :style1 do
+      -style "style1" do
         my css2
     EOC
 

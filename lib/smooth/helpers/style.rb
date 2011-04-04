@@ -11,10 +11,17 @@ module Smooth
       #end
 
       def style(key, &block)
-        @styles ||= {}
+        # [ key, style_body ]
+        @styles ||= []
 
-        @styles[key] = capture_haml(&block) unless @styles[key]
+        @styles << [ key, capture_haml(&block) ] unless style?(key)
       end
+
+      def style?(key)
+        key = key.to_s
+        @styles.find { |(k, _)| k.to_s == key }
+      end
+      private :style?
 
       def styles
         @styles.map do |key, style|
