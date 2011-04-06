@@ -3,17 +3,19 @@ Smooth
 
 Smooth is a library, wrapped around the amazing haml-sass parser, to generate sexy html-slides from a haml file.
 
+_(README and documentation under heavy development)_
+
 Abstract
 --------
-*1.* Create a @template.haml@ in your working directory for your slides:
+**1.** Create a `template.haml` in your working directory for your slides:
 
     - layout :default
-    
+
       - about do
         -title    "My first Slides"
         -subtitle "Generated with Smooth"
         -author   "Your Name"
-        
+
       - slides do
         -title
         -slide "Title of the first Slide" do
@@ -29,9 +31,9 @@ Abstract
                 end
               end
 
-*2.* Call @smooth > index.html@
+**2.** Call `smooth build` in the same directory
 
-*3.* Watch the result of the File above: 
+**3.** Watch the [result](http://techfolio.github.com/smooth/example_slide/) of the File above 
 
 The helpers
 -----------
@@ -75,4 +77,9 @@ How to use it?
 Installation
 ----------------
 
-Deps: `apt-get install libonig-dev`
+* Not a gem yet, so only direct usage of the repo possible
+* for executing `bundle`, this lib is required: `apt-get install libonig-dev`
+* then type `bundle`
+* you can use bin/smooth with relative path in your slide dir:
+    * `cd ../my_slides`
+    * `../smooth/bin/smiith build`
