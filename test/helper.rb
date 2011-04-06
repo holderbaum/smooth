@@ -32,9 +32,8 @@ class Test::Unit::TestCase
   end
 
   def assert_slides_creation
-    index = File.join(TEST_DIR, 'index.html')
-    assert File.exist?(index), "#{index} missing."
-    assert_equal File.open(File.join(CLI_TEST_DIR, 'index.html')).read, File.open(index).read, "#{index} wrong content."
+    diff = `diff -r #{CLI_TEST_DIR} #{TEST_DIR}|grep -v "Only in #{TEST_DIR}: .gitkeep"`
+    assert diff.empty?, diff 
   end
 
   def renderer(template, layout, config, helpers)
