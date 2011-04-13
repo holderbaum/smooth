@@ -6,3 +6,4 @@ src/test/*
 test/fixtures/test_dir/*
 .yardoc
 doc
+pkg
