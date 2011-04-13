@@ -17,7 +17,8 @@ begin
     s.email = "jh@neopoly.de"
     s.homepage = "http://techfolio.de"
     s.authors = ["Jakob Holderbaum"]
-    s.files.exclude 'src'
+    s.files.exclude 'example'
+    s.files.exclude 'doc'
     s.executables = ["smooth"]
   end
 
