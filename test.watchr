@@ -13,7 +13,7 @@ LIBNOTIFY_OPTIONS = {
     :summary => "PASS"
   },
   :red => {
-    :icon_path => "/usr/share/icons/gnome/scalable/emotes/face-sick.svg",
+    :icon_path => "/usr/share/icons/gnome/scalable/emotes/face-angry.svg",
     :timeout => 2.5,
     :urgency => :critical,
     :summary => "FAIL!"
