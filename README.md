@@ -17,11 +17,11 @@ Abstract
         -author   "Your Name"
 
       - slides do
-        -title
-        -slide "Title of the first Slide" do
+        = title
+        = slide "Title of the first Slide" do
           %p This is something I wan't to say here
-        -section "Syntax highlighting", :desc => "Follows on the next slide"
-        -slide "Syntax highlighting" do
+        = section "Syntax highlighting", :desc => "Follows on the next slide"
+        = slide "Syntax highlighting" do
           %p we use the blackboard TextMate theme here
           ~ code :ruby, :blackboard  do
             :plain
