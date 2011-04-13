@@ -12,8 +12,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "smooth"
-    s.summary = "create nice haml slides (powered by slippy)"
-    s.description = "extends haml with useful helpers, a layout concept and rails-partial like components."
+    s.summary = "create nice haml slides"
+    s.description = "Haml-based slide generator for fast slides-creation from scratch."
     s.email = "jh@neopoly.de"
     s.homepage = "http://techfolio.de"
     s.authors = ["Jakob Holderbaum"]

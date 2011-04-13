@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["Jakob Holderbaum"]
   s.date = %q{2011-04-13}
   s.default_executable = %q{smooth}
-  s.description = %q{extends haml with useful helpers, a layout concept and rails-partial like components.}
+  s.description = %q{Haml-based slide generator for fast slides-creation from scratch.}
   s.email = %q{jh@neopoly.de}
   s.executables = ["smooth"]
   s.extra_rdoc_files = [
@@ -108,7 +108,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://techfolio.de}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
-  s.summary = %q{create nice haml slides (powered by slippy)}
+  s.summary = %q{create nice haml slides}
   s.test_files = [
     "test/cli_test.rb",
     "test/config_test.rb",
