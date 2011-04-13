@@ -3,7 +3,8 @@ require 'bundler/setup'
 
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+
+require 'yard'
 
 task :default => [:test]
 
@@ -26,13 +27,8 @@ rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"
 end
 
-# RDoc
-Rake::RDocTask.new do |rd|
-  rd.title = "Smooth"
-  rd.main = "README.rdoc"
-  rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
-  rd.rdoc_dir = "doc"
-end
+# Generate doc
+YARD::Rake::YardocTask.new
 
 #TestUnit
 desc "Run basic tests"
