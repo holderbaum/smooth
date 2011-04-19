@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{smooth}
-  s.version = "1.0.1"
+  s.version = "1.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jakob Holderbaum"]
-  s.date = %q{2011-04-13}
+  s.date = %q{2011-04-19}
   s.default_executable = %q{smooth}
   s.description = %q{Haml-based slide generator for fast slides-creation from scratch.}
   s.email = %q{jh@neopoly.de}
@@ -40,10 +40,14 @@ Gem::Specification.new do |s|
     "lib/smooth/helpers/style.rb",
     "lib/smooth/renderer.rb",
     "share/assets/img/default-bg.jpg",
+    "share/assets/img/smooth_js.gif",
     "share/assets/js/jquery-1.5.1.min.js",
+    "share/assets/js/jquery-1.5.2.min.js",
     "share/assets/js/jquery.centreinwindow.js",
     "share/assets/js/jquery.tools.min.js",
+    "share/assets/js/smooth.js",
     "share/assets/style/default.css",
+    "share/assets/style/smooth_js.css",
     "share/assets/style/uv/active4d.css",
     "share/assets/style/uv/all_hallows_eve.css",
     "share/assets/style/uv/amy.css",
@@ -70,6 +74,7 @@ Gem::Specification.new do |s|
     "share/components/slides.haml",
     "share/components/title.haml",
     "share/layouts/default.haml",
+    "share/layouts/smooth_js.haml",
     "smooth.gemspec",
     "test.watchr",
     "test/cli_test.rb",
