@@ -1,0 +1,26 @@
+- assets = ['img/smooth_js.gif'] # add more if necessary
+- assets.each { |asset| copy_asset asset }
+
+!!!XML
+!!!STRICT
+%html
+  %head
+    %title= about :title
+
+    %script{ :src => js_path("jquery-1.5.2.min") }
+    %script{ :src => js_path("smooth") }
+
+    %link{ :href => css_path("smooth_js"), :rel => "stylesheet", :type => "text/css" }/
+
+    = content :head
+
+    %style{ :type => 'text/css' }
+      = styles
+
+  %body
+    :javascript
+      jQuery(function($) {
+        $.smooth();
+      });
+
+    = slides
