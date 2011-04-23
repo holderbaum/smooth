@@ -3,9 +3,7 @@ require 'helper'
 class SmoothHelpersSlidesTest < Test::Unit::TestCase
 
   def renderer_context(haml)
-    r = renderer(haml, nil, Smooth::Config.new, [Smooth::Helpers::ContentStore, Smooth::Helpers::Components, Smooth::Helpers::Slides])
-    r.result
-    r.context
+    renderer(haml, :helpers => [Smooth::Helpers::ContentStore, Smooth::Helpers::Components, Smooth::Helpers::Slides]).tap(&:result).context
   end
 
 

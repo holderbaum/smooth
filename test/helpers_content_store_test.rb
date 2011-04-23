@@ -3,14 +3,11 @@ require 'helper'
 class SmoothHelpersContentStoreTest < Test::Unit::TestCase
 
   def renderer_context(haml)
-    r = renderer(haml, nil, Smooth::Config.new, Smooth::Helpers::ContentStore)
-    r.result
-    r.context
+    renderer(haml, :helpers => Smooth::Helpers::ContentStore).tap(&:result).context
   end
 
   def renderer_result(haml)
-    r = renderer(haml, nil, Smooth::Config.new, Smooth::Helpers::ContentStore)
-    r.result
+    renderer(haml, :helpers => Smooth::Helpers::ContentStore).result
   end
 
   context "rendering" do

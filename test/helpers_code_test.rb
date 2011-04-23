@@ -3,14 +3,11 @@ require 'helper'
 class SmoothHelpersCodeTest < Test::Unit::TestCase
 
   def renderer_result(haml)
-    r = renderer(haml, nil, Smooth::Config.new, [Smooth::Helpers::Assets, Smooth::Helpers::ContentStore, Smooth::Helpers::Code])
-    r.result
+    renderer(haml, :helpers => [Smooth::Helpers::Assets, Smooth::Helpers::ContentStore, Smooth::Helpers::Code]).result
   end
 
   def renderer_context(haml)
-    r = renderer(haml, nil, Smooth::Config.new, [Smooth::Helpers::Assets, Smooth::Helpers::ContentStore, Smooth::Helpers::Code])
-    r.result
-    r.context
+    renderer(haml, :helpers => [Smooth::Helpers::Assets, Smooth::Helpers::ContentStore, Smooth::Helpers::Code]).tap(&:result).context
   end
 
   test "it should parse the code and create html" do

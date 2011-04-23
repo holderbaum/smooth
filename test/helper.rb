@@ -36,11 +36,16 @@ class Test::Unit::TestCase
     assert diff.empty?, diff 
   end
 
-  def renderer(template, layout, config, helpers)
-    Smooth::Renderer.new(template, config).tap do |r|
-      r.layout = layout if layout
+  def renderer(template, options={})
+    options = {
+      :helpers  => [],
+      :config   => Smooth::Config.new
+    }.update(options)
 
-      Array(helpers).each do |helper|
+    Smooth::Renderer.new(template, options[:config]).tap do |r|
+      r.layout = options[:layout] if options[:layout]
+
+      Array(options[:helpers]).each do |helper|
         r.register_helpers helper
       end
     end

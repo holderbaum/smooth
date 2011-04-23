@@ -7,7 +7,7 @@ class SmoothHelpersComponentsTest < Test::Unit::TestCase
   CONFIG.components_pathes.prepend File.expand_path("../fixtures/components/path2", __FILE__)
 
   def renderer_result(haml)
-    renderer(haml, nil, CONFIG, Smooth::Helpers::Components).result
+    renderer(haml, :config => CONFIG, :helpers => Smooth::Helpers::Components).result
   end
 
   teardown do
