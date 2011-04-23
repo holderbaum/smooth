@@ -35,16 +35,13 @@ class Test::Unit::TestCase
   end
 
   def renderer(template, layout, config, helpers)
-    helpers = Array(helpers)
+    Smooth::Renderer.new(template, config).tap do |r|
+      r.layout = layout if layout
 
-    r = Smooth::Renderer.new(template, config)
-    r.layout = layout if layout
-
-    helpers.each do |helper|
-      r.register_helpers helper
+      Array(helpers).each do |helper|
+        r.register_helpers helper
+      end
     end
-
-    r
   end
 
 end
