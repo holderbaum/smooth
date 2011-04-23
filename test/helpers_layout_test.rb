@@ -1,5 +1,4 @@
-require 'test/helper'
-require 'lib/smooth'
+require 'helper'
 
 class SmoothHelpersLayoutTest < Test::Unit::TestCase
 

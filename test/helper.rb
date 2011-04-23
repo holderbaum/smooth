@@ -3,6 +3,8 @@ $LOAD_PATH.unshift File.dirname(__FILE__)
 require 'contest'
 require 'fileutils'
 
+require 'smooth'
+
 class String
   def unindent
     indent = self[/^\s+/]
