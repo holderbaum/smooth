@@ -1,5 +1,4 @@
-require 'test/helper'
-require 'lib/smooth'
+require 'helper'
 
 class SmoothHelpersAssetsTest < Test::Unit::TestCase
 
@@ -7,8 +6,7 @@ class SmoothHelpersAssetsTest < Test::Unit::TestCase
   CONFIG.assets_path.set File.expand_path('../fixtures/assets', __FILE__)
 
   def renderer_result(haml)
-    r = renderer(haml, nil, CONFIG, Smooth::Helpers::Assets)
-    r.result
+    renderer(haml, :config => CONFIG, :helpers => Smooth::Helpers::Assets).result
   end
 
   teardown do

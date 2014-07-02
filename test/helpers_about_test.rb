@@ -1,12 +1,9 @@
-require 'test/helper'
-require 'lib/smooth'
+require 'helper'
 
 class SmoothHelpersAboutTest < Test::Unit::TestCase
 
   def renderer_context(haml)
-    r = renderer(haml, nil, Smooth::Config.new, Smooth::Helpers::About)
-    r.result
-    r.context
+    renderer(haml, :helpers => Smooth::Helpers::About).tap(&:result).context
   end
 
   test "it should set meta attributes" do

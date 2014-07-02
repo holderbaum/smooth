@@ -1,5 +1,4 @@
-require 'test/helper'
-require 'lib/smooth'
+require 'helper'
 
 class SmoothHelpersLayoutTest < Test::Unit::TestCase
 
@@ -7,9 +6,8 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
   CONFIG.layouts_pathes.prepend File.expand_path("../fixtures/layouts/path1", __FILE__)
   CONFIG.layouts_pathes.prepend File.expand_path("../fixtures/layouts/path2", __FILE__)
 
-  def renderer(haml, layout = nil)
-    r = super(haml, layout, CONFIG, Smooth::Helpers::Layout)
-    r.result
+  def renderer_result(haml, layout=nil)
+    renderer(haml, :config => CONFIG, :helpers => Smooth::Helpers::Layout, :layout => layout).result
   end
 
   test "it should be possible to set raw haml content as layout" do
@@ -22,7 +20,7 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
       <div class='layout'>foo</div>
     EOC
 
-    assert_equal result, renderer(template)
+    assert_equal result, renderer_result(template)
   end
 
   test "it should use the layout from layouts pathes" do
@@ -54,8 +52,8 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
       </div>
     EOC
 
-    assert_equal results[0], renderer(templates[0])
-    assert_equal results[1], renderer(templates[1])
+    assert_equal results[0], renderer_result(templates[0])
+    assert_equal results[1], renderer_result(templates[1])
   end
 
   test "it should accept strings with and without .haml" do
@@ -87,8 +85,8 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
       </div>
     EOC
 
-    assert_equal results[0], renderer(templates[0])
-    assert_equal results[1], renderer(templates[1])
+    assert_equal results[0], renderer_result(templates[0])
+    assert_equal results[1], renderer_result(templates[1])
   end
 
   test "it should raise if no layout is found" do
@@ -97,7 +95,7 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
     EOC
     
     e = assert_raise RuntimeError do
-      renderer(template)
+      renderer_result(template)
     end
 
     assert_equal "Layout 'this_layout_wont_be_found.haml' not found.", e.message
@@ -113,6 +111,6 @@ class SmoothHelpersLayoutTest < Test::Unit::TestCase
       <div class='layout'>foo</div>
     EOC
 
-    assert_equal result, renderer(template, ".layout= @inner")
+    assert_equal result, renderer_result(template, ".layout= @inner")
   end
 end

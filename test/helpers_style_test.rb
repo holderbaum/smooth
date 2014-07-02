@@ -1,12 +1,9 @@
-require 'test/helper'
-require 'lib/smooth'
+require 'helper'
 
 class SmoothHelpersStyleTest < Test::Unit::TestCase
 
   def renderer_context(haml)
-    r = renderer(haml, nil, Smooth::Config.new, [Smooth::Helpers::ContentStore, Smooth::Helpers::Style])
-    r.result
-    r.context
+    renderer(haml, :helpers => [Smooth::Helpers::ContentStore, Smooth::Helpers::Style]).tap(&:result).context
   end
 
   test "it should provide a collecting style helper" do

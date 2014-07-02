@@ -34,6 +34,7 @@ YARD::Rake::YardocTask.new
 #TestUnit
 desc "Run basic tests"
 Rake::TestTask.new("test") do |t|
+  t.libs    = %w[lib test]
   t.pattern = 'test/*_test.rb'
   t.verbose = true
   # t.warning = true

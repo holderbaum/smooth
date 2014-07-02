@@ -1,9 +1,9 @@
-ENV["RAILS_ENV"] = "test"
-
 $LOAD_PATH.unshift File.dirname(__FILE__)
 
 require 'contest'
 require 'fileutils'
+
+require 'smooth'
 
 class String
   def unindent
@@ -36,17 +36,19 @@ class Test::Unit::TestCase
     assert diff.empty?, diff 
   end
 
-  def renderer(template, layout, config, helpers)
-    helpers = Array(helpers)
+  def renderer(template, options={})
+    options = {
+      :helpers  => [],
+      :config   => Smooth::Config.new
+    }.update(options)
 
-    r = Smooth::Renderer.new(template, config)
-    r.layout = layout if layout
+    Smooth::Renderer.new(template, options[:config]).tap do |r|
+      r.layout = options[:layout] if options[:layout]
 
-    helpers.each do |helper|
-      r.register_helpers helper
+      Array(options[:helpers]).each do |helper|
+        r.register_helpers helper
+      end
     end
-
-    r
   end
 
 end
